@@ -13,15 +13,6 @@ body {
     background-color: var(--bgColor);
 }
 
-div {
-    border-style: solid;
-    border-right: 0;
-    border-left: 0;
-    border-width: 5px;
-    border-color: rgba(var(--leadColorValues), 0.3);
-
-}
-
 h1 {
     color: var(--leadColor);
     font-size: 500%;
@@ -62,4 +53,13 @@ a{
     font-family: var(--sFont);
     font-weight: normal;
     text-shadow: 0px 1px 5px var(--leadColor);
+}
+
+div {
+    border-style: solid;
+    border-right: 0;
+    border-left: 0;
+    border-width: 5px;
+    border-color: rgba(var(--leadColorValues), 0.3);
+
 }
