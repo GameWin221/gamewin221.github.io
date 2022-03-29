@@ -3,6 +3,7 @@
     --sFont: Courier New;
 
     --leadColor:     rgb(109, 255, 170);
+    --leadColorShadow: rgb(50, 112, 74);
     --leadColorValues:     109, 255, 170;
     --subtitleColor: rgb(102, 204, 156);
     --textColor:     rgb(187, 187, 202);
@@ -18,21 +19,22 @@ h1 {
     font-size: 500%;
     font-family: var(--mFont);
     font-weight: bold;
-    text-shadow: 0px 2px 3px var(--leadColor);
+    text-shadow: 0 4px 2px var(--leadColorShadow);
+    
 }
 h2 {
     color: var(--subtitleColor);
     font-size: 155%;
     font-family: var(--mFont);
     font-weight: bold;
-    text-shadow: 0px 1px 1px var(--subtitleColor);
+    text-shadow: 0 2px 2px var(--leadColorShadow);
 }
 h3 {
     color: var(--subtitleColor);
     font-size: 100%;
     font-family: var(--mFont);
     font-weight: normal;
-    text-shadow: 0px 1px 1px var(--subtitleColor);
+    text-shadow: 0 1px 1px var(--subtitleColor);
 }
 h4 {
     color: var(--subtitleColor);
@@ -49,16 +51,17 @@ p {
 }
 a{
     color: var(--leadColor);
-    font-size: 100%;
+    font-size: 110%;
     font-family: var(--sFont);
     font-weight: normal;
-    text-shadow: 0px 1px 5px var(--leadColor);
+    text-shadow: 0 0 12px var(--leadColor);
+    text-decoration:none;
 }
 
 
 .separator {
     border-style: solid;
-    border-width: 6px;
+    border-width: 7px;
     border-color: rgba(var(--leadColorValues), 0.3);
 
     margin: 100px;
@@ -108,12 +111,10 @@ a{
 ::-webkit-scrollbar {
     width: 10px;
 }
-  
 ::-webkit-scrollbar-track {
       box-shadow: inset 0 0 3px rgb(0, 0, 0);
       border-radius: 4px;
 }
-  
 ::-webkit-scrollbar-thumb {
     background: var(--leadColor);
     border-radius: 4px;
