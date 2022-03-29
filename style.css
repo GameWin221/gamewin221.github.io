@@ -12,9 +12,6 @@
 body {
     background-color: var(--bgColor);
 }
-div {
-    white-space: nowrap
-}
 
 h1 {
     color: var(--leadColor);
@@ -58,14 +55,55 @@ a{
     text-shadow: 0px 1px 5px var(--leadColor);
 }
 
+
 .separator {
     border-style: solid;
-    border-width: 8px;
+    border-width: 6px;
     border-color: rgba(var(--leadColorValues), 0.3);
 
-    margin-left: 100px;
-    margin-right: 100px;
+    margin: 100px;
 }
+
+.familiarwith {
+    display: flex;              
+    flex-direction: row;        
+    flex-wrap: nowrap;          
+    justify-content: space-between;
+    width: 70%;
+    height: 110%;
+}
+.withleft {
+    float: left;
+    width: 33%;
+}
+.withcenter{
+    float: center;
+    width: 33%;
+}
+.withright {
+    float: right;
+    width: 33%;
+}
+
+.myprojects{
+    flex: auto;
+    flex-wrap: wrap;
+    margin-trim: all;
+
+    overflow: hidden;
+}
+.projectleft{
+    margin-left: -50%;
+    margin-bottom: 5%;
+    margin-top: 3%;
+    width: 33%;
+}
+.projectright{
+    margin-right: -50%;
+    margin-bottom: 5%;
+    margin-top: 3%;
+}
+
 
 ::-webkit-scrollbar {
     width: 10px;
