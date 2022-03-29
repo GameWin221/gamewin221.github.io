@@ -24,7 +24,7 @@ h1 {
 }
 h2 {
     color: var(--subtitleColor);
-    font-size: 155%;
+    font-size: 165%;
     font-family: var(--mFont);
     font-weight: bold;
     text-shadow: 0 2px 2px var(--leadColorShadow);
@@ -67,14 +67,33 @@ a{
     margin: 100px;
 }
 
-.familiarwith {
-    display: flex;              
-    flex-direction: row;        
-    flex-wrap: nowrap;          
-    justify-content: space-between;
-    width: 70%;
-    height: 110%;
+@media only screen and (max-width: 900px) {
+    .familiarwith {
+        display: flex;              
+        flex-direction: column;        
+        flex-wrap: nowrap;          
+        justify-content: space-between;
+        width: 70%;
+        height: 110%;
+
+        align-self: center;
+        align-items: center;
+
+        margin-bottom: 10%;
+    }
 }
+@media only screen and (min-width: 900px) {
+    .familiarwith {
+        display: flex;              
+        flex-direction: row;        
+        flex-wrap: nowrap;          
+        justify-content: space-between;
+
+        width: 70%;
+        height: 110%;
+    }
+}
+
 .withleft {
     float: left;
     width: 33%;
@@ -88,23 +107,47 @@ a{
     width: 33%;
 }
 
-.myprojects{
-    flex: auto;
-    flex-wrap: wrap;
-    margin-trim: all;
+@media only screen and (max-width: 900px) {
+    .myprojects{
+        flex: auto;
+        flex-direction: column;
+        flex-wrap: wrap;
+        margin-trim: all;
 
-    overflow: hidden;
+        overflow: hidden;
+    }
+    .projectleft{
+        margin-bottom: 5%;
+        margin-top: 3%;
+        width: 100%;
+    }
+    .projectright{
+        margin-bottom: 5%;
+        margin-top: 3%;
+        width: 100%;
+    }
 }
-.projectleft{
-    margin-left: -50%;
-    margin-bottom: 5%;
-    margin-top: 3%;
-    width: 33%;
-}
-.projectright{
-    margin-right: -50%;
-    margin-bottom: 5%;
-    margin-top: 3%;
+@media only screen and (min-width: 900px) 
+{
+    .myprojects{
+        flex: auto;
+        flex-wrap: wrap;
+        margin-trim: all;
+
+        overflow: hidden;
+    }
+    .projectleft{
+        margin-left: -50%;
+        margin-bottom: 5%;
+        margin-top: 3%;
+        width: 50%;
+    }
+    .projectright{
+        margin-right: -50%;
+        margin-bottom: 5%;
+        margin-top: 3%;
+        width: 50%;
+    }
 }
 
 
