@@ -14,12 +14,11 @@ body {
 }
 
 div {
-    border-style: dotted;
-    margin-left: 15%;
-    margin-right: 15%;
-    border-radius: 2%;
+    border-style: solid;
+    border-right: 0;
+    border-left: 0;
     border-width: 5px;
-    border-color: rgba(var(--leadColorValues), 0.5);
+    border-color: rgba(var(--leadColorValues), 0.3);
 
 }
 
