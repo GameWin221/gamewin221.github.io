@@ -1,0 +1,66 @@
+:root{
+    --mFont: Verdana;
+    --sFont: Courier New;
+
+    --leadColor: rgb(109, 255, 170);
+    --leadColorValues: 109, 255, 170;
+    --subtitleColor: rgb(102, 204, 156);
+    --textColor: #bbbbca;
+    --bgColor: rgb(42, 46, 58);
+}
+
+body {
+    background-color: var(--bgColor);
+}
+
+div {
+    border-style: dotted;
+    margin-left: 15%;
+    margin-right: 15%;
+    border-radius: 2%;
+    border-width: 5px;
+    border-color: rgba(var(--leadColorValues), 0.5);
+
+}
+
+h1 {
+    color: var(--leadColor);
+    font-size: 500%;
+    font-family: var(--mFont);
+    font-weight: bold;
+    text-shadow: 0px 2px 3px var(--leadColor);
+}
+h2 {
+    color: var(--subtitleColor);
+    font-size: 155%;
+    font-family: var(--mFont);
+    font-weight: bold;
+    text-shadow: 0px 1px 1px var(--subtitleColor);
+}
+h3 {
+    color: var(--subtitleColor);
+    font-size: 100%;
+    font-family: var(--mFont);
+    font-weight: normal;
+    text-shadow: 0px 1px 1px var(--subtitleColor);
+}
+h4 {
+    color: var(--subtitleColor);
+    font-size: 110%;
+    font-family: var(--sFont);
+    font-weight: normal;
+}
+
+p {
+    color: var(--textColor);
+    font-size: 100%;
+    font-family: var(--sFont);
+    font-weight: normal;
+}
+a{
+    color: var(--leadColor);
+    font-size: 100%;
+    font-family: var(--sFont);
+    font-weight: normal;
+    text-shadow: 0px 1px 5px var(--leadColor);
+}
