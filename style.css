@@ -24,7 +24,7 @@ h1 {
 }
 h2 {
     color: var(--subtitleColor);
-    font-size: 165%;
+    font-size: 200%;
     font-family: var(--mFont);
     font-weight: bold;
     text-shadow: 0 2px 2px var(--leadColorShadow);
@@ -54,21 +54,55 @@ a{
     font-size: 110%;
     font-family: var(--sFont);
     font-weight: normal;
-    text-shadow: 0 0 12px var(--leadColor);
+    text-shadow: 0 0 15px var(--leadColor);
     text-decoration:none;
 }
 
+.iworkwith {
+    display: flex;              
+    flex-direction: row;        
+    flex-wrap: nowrap;          
+    justify-content: space-between;
 
-.separator {
-    border-style: solid;
-    border-width: 7px;
-    border-color: rgba(var(--leadColorValues), 0.3);
-
-    margin: 100px;
+    width: 70%;
+    height: 110%;
+}
+.languages {
+    float: left;
+    width: 33%;
+}
+.apis{
+    float: center;
+    width: 33%;
+}
+.software {
+    float: right;
+    width: 33%;
 }
 
+.myprojects{
+    flex: auto;
+    flex-wrap: wrap;
+    margin-trim: all;
+
+    overflow: hidden;
+}
+.projectleft{
+    margin-left: -50%;
+    margin-bottom: 5%;
+    margin-top: 3%;
+    width: 50%;
+}
+.projectright{
+    margin-right: -50%;
+    margin-bottom: 5%;
+    margin-top: 3%;
+    width: 50%;
+}
+
+/* If launched on a mobile device or a shrinked browser*/
 @media only screen and (max-width: 900px) {
-    .familiarwith {
+    .iworkwith {
         display: flex;              
         flex-direction: column;        
         flex-wrap: nowrap;          
@@ -81,33 +115,24 @@ a{
 
         margin-bottom: 10%;
     }
-}
-@media only screen and (min-width: 900px) {
-    .familiarwith {
-        display: flex;              
-        flex-direction: row;        
-        flex-wrap: nowrap;          
-        justify-content: space-between;
-
-        width: 70%;
-        height: 110%;
+    .languages {
+        float: center;
+        width: 100%;
+        align-items: center;
+        margin-bottom: 10%;
     }
-}
+    .apis{
+        float: center;
+        width: 100%;
+        align-items: center;
+        margin-bottom: 10%;
+    }
+    .software {
+        float: center;
+        width: 100%;
+        align-items: center;
+    }
 
-.withleft {
-    float: left;
-    width: 33%;
-}
-.withcenter{
-    float: center;
-    width: 33%;
-}
-.withright {
-    float: right;
-    width: 33%;
-}
-
-@media only screen and (max-width: 900px) {
     .myprojects{
         flex: auto;
         flex-direction: column;
@@ -117,39 +142,30 @@ a{
         overflow: hidden;
     }
     .projectleft{
-        margin-bottom: 5%;
-        margin-top: 3%;
+        margin-left: 0;
         width: 100%;
     }
     .projectright{
-        margin-bottom: 5%;
-        margin-top: 3%;
+        margin-right: 0;
         width: 100%;
     }
-}
-@media only screen and (min-width: 900px) 
-{
-    .myprojects{
-        flex: auto;
-        flex-wrap: wrap;
-        margin-trim: all;
 
-        overflow: hidden;
-    }
-    .projectleft{
-        margin-left: -50%;
-        margin-bottom: 5%;
-        margin-top: 3%;
-        width: 50%;
-    }
-    .projectright{
-        margin-right: -50%;
-        margin-bottom: 5%;
-        margin-top: 3%;
-        width: 50%;
+    h1 {
+        font-size: 390%;
     }
 }
 
+.separator {
+    
+    border-style: solid;
+    border-width: 7px;
+    border-color: rgba(var(--leadColorValues), 0.3);
+
+    margin-top: 6%;
+    margin-bottom: 6%;
+    margin-right: 8%;
+    margin-left: 8%;
+}
 
 ::-webkit-scrollbar {
     width: 10px;
