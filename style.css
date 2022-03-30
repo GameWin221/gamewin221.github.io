@@ -19,6 +19,7 @@ html{
 }
 body {
     background-color: var(--bgColor);
+    margin: 0px;
 }
 
 h1 {
