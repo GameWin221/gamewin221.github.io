@@ -5,114 +5,98 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="Images/Icon.png">
-    <title>My Portfolio</title>
+    <title>Mateusz Antkiewicz</title>
 </head>
 
-<body>
-    <div align="center">
-        <h1>About Me:</h1>
+<div class="navigationpanel">
+    <div class="navigationbuttoncontainer">
+        <button class="navigationbutton" onclick="location.href = 'index.html'   ;"><h6 align="center">Home        </h6></button> 
+        <button class="navigationbutton" onclick="location.href = 'wip.html';"><h6 align="center">All Projects</h6></button> 
+    </div>
+</div>
 
-        <div class="aboutme">
-            <h2>Personal Info:</h2>
-            <p>Name:    <b>Mateusz Antkiewicz                              </b></p>
-            <p>Country: <b>Poland                                          </b></p>
-            <p><b><a href="https://github.com/GameWin221">My Github Profile</a></b></p>
+<div align="center">
 
-            <br></br>
+    <p style="color: rgb(83, 83, 83);">Note that this site is still being made...</p>
 
-            <h2>Contact:</h2>
-            <p>Discord: <b>GameWin221#1648                                </b></p>
-            <p>E-mail:  <b>mateusz.gamewin1@gmail.com                     </b></p>
+    <h1>About Me:</h1>
+    <div class="aboutme">
+        <p>Hi, my name Mateusz Antkiewicz and I come from Poland. </p>
+        <p></p>
+    </div>
+   
+    <p class="separator"></p>
+
+    <h1>Best Projects:</h1>
+    <div class="bestprojectscontainer">
+        <button class="bestproject" style="background-image: url('Images/3DModelInspector.png');" onclick="window.open('https://github.com/GameWin221/3D-Model-Inspector', '_blank');">
+            <h6>3D Model Inspector</h6>
+        </button>
+
+        <br></br>
+
+        <button class="bestproject"  style="background-image: url('Images/BallsJourney.png');" onclick="window.open('https://play.google.com/store/apps/details?id=com.anwitch.ballsjourney&gl=PL', '_blank');">
+            <h6>Ball's Journey: Into Space</h6>
+        </button>
+    </div>
+
+    <p class="separator"></p>
+
+    <h1>I Work With:</h1>
+    <div class="iworkwith">
+
+        <div class="languages">
+            <h2>Languages:</h2>
+            <p>C++   </p> 
+            <img id="coloricon" src="Images/CPPIcon.png" width="100" height="100">
+            
+            <p>C#    </p>
+            <img id="coloricon" src="Images/CSIcon.png" width="100" height="100">
+            <h4>Going to learn:</h4>
+            <p>Rust</p>
+            <img id="coloricon" src="Images/RustIcon.png" width="100" height="100">
         </div>
 
-        <p class="separator"></p>
-
-        <h1>I Work With:</h1>
-
-        <div class="iworkwith">
-            <div class="languages">
-                <h2>Languages:</h2>
-                <p>C++   </p> 
-                <img src="Images/Icon.png" width="100" height="100">
-                
-                <p>C#    </p>
-                <img src="Images/CSIcon.png" width="100" height="100">
-
-                <h4>Going to learn:</h4>
-                <p>Rust</p>
-                <img src="Images/RustIcon.png" width="100" height="100">
-            </div>
-
-            <div class="apis">
-                <h2>APIs:</h2>
-                <p>Vulkan</p>
-                <img src="Images/VulkanIcon.png" width="300" height="80">
-                
-                <p>OpenGL</p>
-                <img src="Images/OpenGLIcon.png" width="245" height="100">
-
-                <h4>Going to learn:</h4>
-                <p>DirectX 12</p>
-                <img src="Images/DirectXIcon.png" width="155" height="130">
-            </div>
-
-            <div class="software">
-                <h2>Software:</h2>
-                <p>Visual Studio (Code)</p>
-                <img src="Images/VisualStudioIcon.png" width="100" height="100">
-                <p>Unity               </p>
-                <img src="Images/UnityIcon.png" width="100" height="100">
-                <p>Unreal Engine 4/5   </p>
-                <img src="Images/UnrealIcon.png" width="100" height="100">
-                <p>Git                 </p>
-                <img src="Images/GitIcon.png" width="100" height="100">
-                
-                <h4>Going to learn:</h4>
-                <p>None - Just for now...  </p>
-            </div>
+        <div class="apis">
+            <h2>APIs:</h2>
+            <p>Vulkan</p>
+            <img id="coloricon" src="Images/VulkanIcon.png" width="300" height="80">
+            
+            <p>OpenGL</p>
+            <img id="coloricon" src="Images/OpenGLIcon.png" width="245" height="100">
+            <h4>Going to learn:</h4>
+            <p>DirectX 12</p>
+            <img id="coloricon" src="Images/DirectXIcon.png" width="145" height="130">
         </div>
 
-        <p class="separator"></p>
-
-        <h1>My Projects</h1>
-
-        <div class="myprojects">
-            <div class="projectleft">
-                <h2>"Eruption" Renderer</h2>
-                <p>C++ and Vulkan      </p>
-
-                <p>The repository isn't public yet</p>
-            </div>
-
-            <div class="projectright">
-                <h2>3D Model Inspector</h2>
-                <p>C++ and OpenGL     </p>
-
-                <p><a href="https://github.com/GameWin221/3D-Model-Inspector">Check It Out...</a></p>
-            </div>
-
-            <div class="projectleft">
-                <h2>2048 Game Clone</h2>
-                <p>C++ and OpenGL  </p>
-
-                <p><a href="https://github.com/GameWin221/2048-Game">Check It Out...</a></p>
-            </div>
-
-            <div class="projectright">
-                <h2>Ball's Journey: Into Space</h2>
-                <p>Unity Game Engine          </p>
-
-                <p><a href="https://play.google.com/store/apps/details?id=com.anwitch.ballsjourney&gl=PL">Check It Out...</a></p>
-
-            </div>
-
-            <div class="projectleft">
-                <h2>"Colorful Logging" Library</h2>
-                <p>C++                        </p>
-
-                <p><a href="https://github.com/GameWin221/Colorful-Logging">Check It Out...</a></p>
-            </div>
+        <div class="software">
+            <h2>Software:</h2>
+            <p>Visual Studio (Code)</p>
+            <img id="coloricon" src="Images/VisualStudioIcon.png" width="100" height="100">
+            <p>Unity               </p>
+            <img id="coloricon" src="Images/UnityIcon.png" width="100" height="100">
+            <p>Unreal Engine 4/5   </p>
+            <img id="coloricon" src="Images/UnrealIcon.png" width="100" height="100">
+            <p>Git                 </p>
+            <img id="coloricon" src="Images/GitIcon.png" width="100" height="100">
+            <h4>Going to learn:</h4>
+            <p>None - Just for now...  </p>
         </div>
     </div>
-</body>
+
+    <p class="separator"></p>
+    
+    <div class="contactme">
+        <h1>Contact Me:</h1>
+        <h2>Via:</h2>
+        <p>Discord: <b>GameWin221#1648           </b></p>
+        <p>or</p>
+        <p>E-mail:  <b>mateusz.gamewin1@gmail.com</b></p>
+    </div>
+
+    <div class="bottompanel">
+        <h5>© Mateusz Antkiewicz</h5>
+    </div>
+
+</div>
 </html>
