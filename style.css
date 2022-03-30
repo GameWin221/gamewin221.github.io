@@ -90,11 +90,7 @@ a{
     height: 110%;
 }
 #coloricon{
-    filter: opacity(0.5)  
-            drop-shadow(0 0 0 var(--leadColor)) 
-            drop-shadow(0 0 0 var(--leadColor))
-            saturate(400%) 
-            brightness(100%);
+    filter: brightness(80%);
 }
 .languages {
     float: left;
