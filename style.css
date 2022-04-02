@@ -9,7 +9,7 @@
     --leadColorShadow: rgb(88, 53, 0);
     --subtitleColor: rgb(255, 130, 46);
 
-    --textColor:     rgb(235, 235, 235);
+    --textColor:     rgb(252, 252, 252);
 
     --bgColor:       rgb(37, 34, 31);
 }
@@ -129,6 +129,8 @@ a{
     background-size: cover;
     background-position: center;
 
+    backdrop-filter: blur(10%);
+
     padding-top: 4%;
     padding-bottom: 4%;
 
@@ -152,22 +154,39 @@ a{
 
 .myprojects{
     flex: auto;
+    
+    flex-direction: column;
     flex-wrap: wrap;
+
     margin-trim: all;
 
     overflow: hidden;
 }
-.projectleft{
-    margin-left: -50%;
-    margin-bottom: 5%;
-    margin-top: 3%;
-    width: 50%;
+.project{
+    float: center;
+
+    padding-left: 1%;
+    padding-right: 1%;
+    padding-bottom: 1%;
+
+    margin-bottom: 4%;
+
+    background-size: cover;
+    border-radius: 20px;
+    background-position: center;
+    
+    text-shadow: var(--bgColor) 0 0 10px, var(--bgColor) 0 0 15px;
+
+    backdrop-filter: blur(100px);
+
+    text-align: left;
+
+    height: 10%;
+    width: 60%;
 }
-.projectright{
-    margin-right: -50%;
-    margin-bottom: 5%;
-    margin-top: 3%;
-    width: 50%;
+.datetime{
+    margin-top: -3%;
+    color: rgb(204, 204, 204);
 }
 
 .navigationpanel{
@@ -273,18 +292,26 @@ a{
     .myprojects{
         flex: auto;
         flex-direction: column;
-        flex-wrap: wrap;
+        flex-wrap: nowrap;
         margin-trim: all;
 
         overflow: hidden;
     }
-    .projectleft{
-        margin-left: 0;
-        width: 100%;
+    .projectcontainer{
+        flex: auto;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        margin-trim: all;
+
+        overflow: hidden;
     }
-    .projectright{
-        margin-right: 0;
-        width: 100%;
+    .projectphoto{
+        width: 40%;
+        float: left;
+    }
+    .projectdescription{
+        width: 40%;
+        float: right;
     }
 
     h1 {
