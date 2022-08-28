@@ -96,8 +96,15 @@ a{
     height: 110%;
 }
 #coloricon{
-    filter: brightness(80%);
+    filter: brightness(75%);
+    transition: 0.33s;
 }
+#coloricon:hover {
+    filter: brightness(100%);
+
+    transform: scale(1.05, 1.05);
+}
+
 .languages {
     float: left;
     width: 33%;
@@ -106,7 +113,7 @@ a{
     float: center;
     width: 33%;
 }
-.software {
+.tools {
     float: right;
     width: 33%;
 }
@@ -182,7 +189,7 @@ a{
     text-align: left;
 
     height: 10%;
-    width: 60%;
+    width: 65%;
 }
 .datetime{
     margin-top: -2.8%;
