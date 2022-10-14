@@ -8,6 +8,7 @@
     <title>Mateusz Antkiewicz | All Projects</title>
 </head>
 
+<body>
 <div class="navigationpanel">
     <div class="navigationbuttoncontainer">
         <button class="navigationbutton" onclick="location.href = 'index.html'   ;"><h6 align="center">Home        </h6></button> 
@@ -22,55 +23,90 @@
     <h1>My Projects</h1>
 
     <div class="myprojects">
-        <div class="project" style="background-color: rgb(78, 78, 78); background-image: url('Images/EruptionEngine.png')">
-            <h2>Eruption Engine</h2>
-            <p class="datetime">March 2022 - Present</p>
-            <p>My own 3D renderer with Vulkan backend. It's made to learn Vulkan API and graphics concepts.</p>
-            <p><a href="https://github.com/GameWin221/Eruption-Engine">Check It Out...</a></p>
+        <div class="project" id="eruptionengine">
+            <div class="titlebar">
+                <h2 class="title">Eruption Engine</h2>
+                <p class="datetime">March 2022 - Present</p>
+            </div>
+        
+            <div class="hidden">
+                <p>My own 3D renderer with Vulkan backend. It's made to learn Vulkan API and graphics concepts.</p>
+                <p><a href="https://github.com/GameWin221/Eruption-Engine">Check It Out...</a></p>
+            </div>
         </div>
 
-        <div class="project" style="background-color: rgb(78, 78, 78)">
-            <h2>Learning Vulkan...</h2>
-            <p class="datetime">February 2022 - March 2022</p>
-            <p>During this timespan I was following <a href="https://vulkan-tutorial.com/">vulkan-tutorial.com</a>.</p>
+        <div class="project" id="learnvulkan">
+            <div class="titlebar">
+                <h2 class="title">Learning Vulkan...</h2>
+                <p class="datetime">February 2022 - March 2022</p>
+            </div>
+
+            <div class="hidden">
+                <p>During this timespan I was following <a href="https://vulkan-tutorial.com/">vulkan-tutorial.com</a>.</p>
+            </div>
         </div>
 
-        <div class="project" style="background-image: url('Images/2048Game.png');">
-            <h2>2048 Game Clone</h2>
-            <p class="datetime">January 2022 - February 2022</p>
-            <p></p>
-            <p><a href="https://github.com/GameWin221/2048-Game">Check It Out...</a></p>
+        <div class="project"  id="coolgameclone">
+            <div class="titlebar">
+                <h2 class="title">2048 Game Clone</h2>
+                <p class="datetime">January 2022 - February 2022</p>
+            </div>
+
+            <div class="hidden">    
+                <p>It's just a simple <a href="https://2048game.com">2048</a> clone made with OpenGL (GLFW and GLEW).</p>
+                <p><a href="https://github.com/GameWin221/2048-Game">Check It Out...</a></p>
+            </div>
         </div>
 
-        <div class="project" style="background-image: url('Images/ColorfulLogging.png');">
-            <h2>"Colorful Logging" Library</h2>
-            <p class="datetime">November 2021</p>
-            <p></p>
-            <p><a href="https://github.com/GameWin221/Colorful-Logging">Check It Out...</a></p>
+        <div class="project" id="colorfullogging">
+            <div class="titlebar">
+                <h2 class="title">"Colorful Logging" Library</h2>
+                <p class="datetime">November 2021</p>
+            </div>
+
+            <div class="hidden">
+                <p>Colorful Logging is a little library made for simple logging with time and colors and benchmarking.</p>
+                <p><a href="https://github.com/GameWin221/Colorful-Logging">Check It Out...</a></p>
+            </div>
         </div>
 
-        <div class="project" style="background-image: url('Images/3DModelInspector.png');">
-            <h2>3D Model Inspector</h2>
-            <p class="datetime">October 2021 - January 2022</p>
-            <p></p>
-            <p><a href="https://github.com/GameWin221/3D-Model-Inspector">Check It Out...</a></p>
+        <div class="project" id="modelinspector">
+            <div class="titlebar">
+                <h2 class="title">3D Model Inspector</h2>
+                <p class="datetime">October 2021 - January 2022</p>
+            </div>
+
+            <div class="hidden">
+                <p>It's my first project related to OpenGL and computer graphics in general.</p>
+                <p><a href="https://github.com/GameWin221/3D-Model-Inspector">Check It Out...</a></p>
+            </div>
         </div>
 
-        <div class="project" style="background-color: rgb(78, 78, 78)">
-            <h2>Learning OpenGL...</h2>
-            <p class="datetime">July 2021 - September 2021</p>
-            <p>During this timespan I was following these tutorials:</p>
-            <p>-<a href="https://learnopengl.com/">LeanOpenGL.com</a> <- the best one imo, although it teaches the old OGL.</p>
-            <p>-<a href="https://www.youtube.com/playlist?list=PLlrATfBNZ98foTJPJ_Ev03o2oq3-GGOS2">The Cherno's OpenGL Series</a></p>
-            <p>-<a href="https://www.youtube.com/playlist?list=PL6xSOsbVA1eYSZTKBxnoXYboy7wc4yg-Z">Suraj Sharma's OpenGL Series</a></p>
-            <p></p>
+        <div class="project" id="learnopengl">
+            <div class="titlebar">
+                <h2 class="title">Learning OpenGL...</h2>
+                <p class="datetime">July 2021 - September 2021</p>
+            </div>
+
+            <div class="hidden">
+                <p>During this timespan I was following these tutorials:</p>
+                <p>-<a href="https://learnopengl.com/">LeanOpenGL.com</a> <- the best one imo</p>
+                <p>-<a href="https://www.youtube.com/playlist?list=PLlrATfBNZ98foTJPJ_Ev03o2oq3-GGOS2">The Cherno's OpenGL Series</a></p>
+                <p>-<a href="https://www.youtube.com/playlist?list=PL6xSOsbVA1eYSZTKBxnoXYboy7wc4yg-Z">Suraj Sharma's OpenGL Series</a></p>
+                <p></p>
+            </div>
         </div>
 
-        <div class="project" style="background-image: url('Images/BallsJourney.png');">
-            <h2>Ball's&nbsp;Journey: Into&nbsp;Space</h2>
-            <p class="datetime">May 2021 - July 2021</p>
-            <p>It's my first <b>officially published</b> game. I'm really proud of it because this was my first big and somewhat complex project.</p>
-            <p><a href="https://play.google.com/store/apps/details?id=com.anwitch.ballsjourney&gl=PL">Check It Out...</a></p>
+        <div class="project" id="ballsjourney">
+            <div class="titlebar">
+                <h2 class="title">Ball's&nbsp;Journey: Into&nbsp;Space</h2>
+                <p class="datetime">May 2021 - July 2021</p>
+            </div>
+            
+            <div class="hidden">
+                <p>It's my first <b>officially published</b> game. I'm really proud of it because this was my first big and somewhat complex project.</p>
+                <p><a href="https://play.google.com/store/apps/details?id=com.anwitch.ballsjourney&gl=PL">Check It Out...</a></p>
+            </div>
         </div>
     </div>
     
@@ -78,4 +114,8 @@
         <h5>© Mateusz Antkiewicz</h5>
     </div>
 </div>
+</body>
+
+<script src="script.js"></script>
+
 </html>

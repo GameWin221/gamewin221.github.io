@@ -5,13 +5,14 @@
     --mFont: space-grotesk;
     --sFont: Courier New;
 
-    --leadColor:     rgb(255, 174, 0);
+    --leadColor:     rgb(240, 104, 0);
     --leadColorShadow: rgb(88, 53, 0);
-    --subtitleColor: rgb(255, 130, 46);
+    --subtitleColor: rgb(212, 113, 46);
 
     --textColor:     rgb(252, 252, 252);
 
-    --bgColor:       rgb(37, 34, 31);
+    --bgColor:       rgb(35, 35, 43);
+    --bgLightColor:       rgb(60, 60, 72);
 }
 
 html{
@@ -101,21 +102,26 @@ a{
 }
 #coloricon:hover {
     filter: brightness(100%);
-
     transform: scale(1.05, 1.05);
 }
 
 .languages {
     float: left;
     width: 33%;
+
+    transition: 0.4s;
 }
 .apis{
     float: center;
     width: 33%;
+
+    transition: 0.4s;
 }
 .tools {
     float: right;
     width: 33%;
+
+    transition: 0.4s;
 }
 
 .bestprojectscontainer{
@@ -172,9 +178,10 @@ a{
 .project{
     float: center;
 
+    background-color: var(--bgLightColor);
+
     padding-left: 1%;
     padding-right: 1%;
-    padding-bottom: 1%;
 
     margin-bottom: 4%;
 
@@ -187,13 +194,65 @@ a{
     backdrop-filter: blur(100px);
 
     text-align: left;
-
     height: 10%;
     width: 65%;
+
+    transition: 0.5s ease;
+}
+
+#eruptionengine:hover {
+    background-image: url(Images/EruptionEngine.png);
+}
+
+#learnvulkan:hover {
+    background-color: rgb(69, 74, 100);
+}
+
+#coolgameclone:hover {
+    background-image: url(Images/2048Game.png);
+}
+
+#colorfullogging:hover {
+    background-image: url(Images/ColorfulLogging.png);
+}
+
+#modelinspector:hover {
+    background-image: url(Images/3DModelInspector.png);
+}
+
+#learnopengl:hover {
+    background-color: rgb(69, 74, 100);
+}
+
+#ballsjourney:hover {
+    background-image: url(Images/BallsJourney.png);
+}
+
+.hidden {
+    max-height: 0;
+    overflow: hidden;
+
+    transition: max-height 0.2s ease-out;
+}
+
+.titlebar{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.title {
+    float: left;
 }
 .datetime{
-    margin-top: -2.8%;
+    float: right;
     color: rgb(204, 204, 204);
+    
+    font-size: 130%;
+    background-color: rgba(60, 60, 72, 0.524);
+
+    border-radius: 4px;
+    border: 4px solid #3c3c4813;
 }
 
 .navigationpanel{
@@ -349,13 +408,16 @@ a{
 }
 
 .separator {
-    
+    /*
     border-style: solid;
     border-width: 2px;
     border-color: var(--leadColor);
+    */
 
-    background-color: var(--leadColor);
+    min-height: 5px;
 
+    background: radial-gradient(circle at center, var(--leadColor),var(--bgColor));
+    
     opacity: 0.3;
 
     margin-top: 8%;
