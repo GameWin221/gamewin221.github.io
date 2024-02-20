@@ -48,6 +48,7 @@ function App() {
 				<div className='w-1/2'>
 					<h1 className='text-7xl mb-8 font-medium'>About Me</h1>
 					<p className='text-xl'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos odit dolorum sapiente aspernatur provident similique tenetur, obcaecati voluptates ea! Eum unde expedita dignissimos pariatur quae suscipit iste laboriosam. Minus, accusamus.</p>
+					<p className='text-xl'>This website is early in development...</p>
 				</div>
 			</div>
 
