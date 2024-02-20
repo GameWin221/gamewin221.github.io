@@ -36,3 +36,55 @@
 ::-webkit-scrollbar-thumb:hover {
 	background: #555;
 }
+
+.textUnderlineAnim{
+	position: relative;
+}
+
+.textUnderlineAnim::before {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	height: 2px;
+	background-color: #000;
+	transition: 0.5s;
+}
+
+.textUnderlineAnim:hover::before {
+	animation: underline .3s ease-in-out forwards;
+}
+
+.textUnderlineAnim:not(:hover)::before {
+	animation: deUnderline .3s ease-in-out forwards;
+}
+
+@keyframes underline {
+	0% {
+		width: 0;
+	}
+	100% {
+		width: 100%;
+	}
+}
+
+@keyframes deUnderline {
+	0% {
+		width: 100%;
+	}
+	100% {
+		width: 0;
+	}
+}
+
+.arrowZoom > svg {
+	transition: ease-in-out .3s;
+}
+
+.arrowZoom:hover > svg:first-child {
+	transform: translateX(8px);
+}
+
+.arrowZoom:hover > svg:last-child {
+	transform: translateX(-8px);
+}

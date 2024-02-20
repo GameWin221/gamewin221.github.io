@@ -10,7 +10,7 @@ function Project({ name, head, link, year, month, day }: { name: string, head: s
         </div>
 
         <h2 className='text-xl text-left mb-10'>{head}</h2>
-        <a href={link} className='float-left flex flex-row items-center hover:text-activeColor hover:scale-125 transition ease-in-out duration-150'><MdKeyboardArrowRight/>&nbsp;Check it out&nbsp;<MdKeyboardArrowLeft/></a>
+        <a href={link} className='arrowZoom float-left flex flex-row items-center hover:text-activeColor hover:scale-125 transition ease-in-out duration-150'><MdKeyboardArrowRight/>&nbsp;Check it out&nbsp;<MdKeyboardArrowLeft/></a>
     </div>
     );
 }

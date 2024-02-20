@@ -24,10 +24,10 @@ function App() {
 				<div className='flex flex-row items-center h-full'>
 					<h2 onClick={()=>{scrollTo('about-me-section')}} id='home-ref' className='text-left font-medium text-5xl cursor-pointer'>Home</h2>
 				</div>
-
+				
 				<div className='flex flex-row justify-between space-x-8 items-center h-full'>
-					<h2 onClick={()=>{scrollTo('about-me-section')}} id='about-me-ref' className='text-xl cursor-pointer'>About Me</h2>
-					<h2 onClick={()=>{scrollTo('projects-section')}} id='projects-ref' className='text-xl cursor-pointer'>Projects</h2>
+					<h2 onClick={()=>{scrollTo('about-me-section')}} id='about-me-ref' className='textUnderlineAnim text-xl cursor-pointer'>About Me</h2>
+					<h2 onClick={()=>{scrollTo('projects-section')}} id='projects-ref' className='textUnderlineAnim text-xl cursor-pointer'>Projects</h2>
 					<h2 onClick={()=>{}} id='blog-ref' className='text-xl line-through cursor-default text-gray-400'>Blog (Work in progress)</h2>
 				</div>
 			</div>
@@ -39,6 +39,7 @@ function App() {
 			<div className='w-2/3 flex flex-row pt-8'>
 				<div className='w-1/2 flex flex-col items-center'>
 					<img src='/profile.png' className='rounded-full w-[12rem] h-[12rem] drop-shadow-xl' alt='Profile'/>
+					{/* 0 0px 20px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1) */}
 					<h1 className='text-left text-4xl font-bold mt-6'>Mateusz Antkiewicz</h1>
 					<h2 className='text-left text-xl'>Hobbyist Programmer</h2>
 					<p className='Email: mateusz.ant8@gmail.com'></p>
@@ -52,42 +53,36 @@ function App() {
 				</div>
 			</div>
 
-			<div className='w-3/4 pt-32'>
-				<h1 className='text-7xl mb-12 font-medium text-center hidden'>Experienced with:</h1>
-
-				<div className='flex flex-row flex-nowrap justify-between mt-10'>
-					<div className='flex flex-wrap flex-col items-center w-1/3'>
-						<h1 className='text-3xl text-center mb-4'>Programming:</h1>
-						<div className='flex flex-wrap justify-center items-center w-2/3'>
-							<TechIcon href='.' src='/tech_icons/CPPIcon.png' className='m-2 brightness-0 w-20 h-20'/>
-							<TechIcon href='.' src='/tech_icons/CSIcon.png' className='m-2 brightness-0 w-20 h-20'/>
-							<TechIcon href='.' src='/tech_icons/RustIcon.png' className='m-2 brightness-0 w-20 h-20'/>
-							<TechIcon href='.' src='/tech_icons/VulkanIcon.png' className='m-2 brightness-0 w-[8 rem] h-20'/>
-							<TechIcon href='.' src='/tech_icons/OpenGLIcon.png' className='m-2 brightness-0 w-[5 rem] h-20'/>
-						</div>
+			<div className='flex justify-center pt-32'>
+				<div className='flex flex-wrap flex-col items-center w-1/3'>
+					<h1 className='text-3xl text-center mb-4'>Programming:</h1>
+					<div className='flex flex-wrap justify-center items-center w-2/3'>
+						<TechIcon href='.' src='/tech_icons/CPPIcon.png' className='m-2 brightness-0 w-20 h-20'/>
+						<TechIcon href='.' src='/tech_icons/CSIcon.png' className='m-2 brightness-0 w-20 h-20'/>
+						<TechIcon href='.' src='/tech_icons/RustIcon.png' className='m-2 brightness-0 w-20 h-20'/>
+						<TechIcon href='.' src='/tech_icons/VulkanIcon.png' className='m-2 brightness-0 w-[8 rem] h-20'/>
+						<TechIcon href='.' src='/tech_icons/OpenGLIcon.png' className='m-2 brightness-0 w-[5 rem] h-20'/>
 					</div>
-
-					<div className='flex flex-wrap flex-col items-center w-1/3'>
-						<h1 className='text-3xl text-center mb-4'>Apps:</h1>
-						<div className='flex flex-wrap justify-center items-center w-2/3'>
-							<TechIcon href='.' src='/tech_icons/GitIcon.png' className='m-2 brightness-0 w-20 h-20'/>
-							<TechIcon href='.' src='/tech_icons/KiCadIcon.png' className='m-2 brightness-0 w-20 h-20'/>
-							<TechIcon href='.' src='/tech_icons/NSightIcon.png' className='m-2 brightness-0 w-20 h-20'/>
-							<TechIcon href='.' src='/tech_icons/RenderDocIcon.png' className='m-2 brightness-0 w-20 h-20'/>
-							<TechIcon href='.' src='/tech_icons/Fusion360Icon.png' className='m-2 brightness-0 w-20 h-20'/>
-							<TechIcon href='.' src='/tech_icons/VisualStudioIcon.png' className='m-2 brightness-0 w-20 h-20'/>
-							<TechIcon href='.' src='/tech_icons/CLionIcon.png' className='m-2 brightness-0 w-20 h-20'/>
-						</div>
+				</div>
+				<div className='flex flex-wrap flex-col items-center w-1/3'>
+					<h1 className='text-3xl text-center mb-4'>Apps:</h1>
+					<div className='flex flex-wrap justify-center items-center w-2/3'>
+						<TechIcon href='.' src='/tech_icons/GitIcon.png' className='m-2 brightness-0 w-20 h-20'/>
+						<TechIcon href='.' src='/tech_icons/KiCadIcon.png' className='m-2 brightness-0 w-20 h-20'/>
+						<TechIcon href='.' src='/tech_icons/NSightIcon.png' className='m-2 brightness-0 w-20 h-20'/>
+						<TechIcon href='.' src='/tech_icons/RenderDocIcon.png' className='m-2 brightness-0 w-20 h-20'/>
+						<TechIcon href='.' src='/tech_icons/Fusion360Icon.png' className='m-2 brightness-0 w-20 h-20'/>
+						<TechIcon href='.' src='/tech_icons/VisualStudioIcon.png' className='m-2 brightness-0 w-20 h-20'/>
+						<TechIcon href='.' src='/tech_icons/CLionIcon.png' className='m-2 brightness-0 w-20 h-20'/>
 					</div>
-
-					<div className='flex flex-wrap flex-col items-center w-1/3'>
-						<h1 className='text-3xl text-center mb-4'>Game Engines:</h1>
-						<div className='flex flex-wrap justify-center items-center w-2/3'>
-							<TechIcon href='.' src='/tech_icons/UnityIcon.png' className='m-2 brightness-0 w-20 h-20'/>
-							<TechIcon href='.' src='/tech_icons/UnrealIcon.png' className='m-2 brightness-0 w-20 h-20'/>
-							<TechIcon href='.' src='/tech_icons/GodotIcon.png' className='m-2 brightness-0 w-20 h-20'/>
-                        </div>
-					</div>
+				</div>
+				<div className='flex flex-wrap flex-col items-center w-1/3'>
+					<h1 className='text-3xl text-center mb-4'>Game Engines:</h1>
+					<div className='flex flex-wrap justify-center items-center w-2/3'>
+						<TechIcon href='.' src='/tech_icons/UnityIcon.png' className='m-2 brightness-0 w-20 h-20'/>
+						<TechIcon href='.' src='/tech_icons/UnrealIcon.png' className='m-2 brightness-0 w-20 h-20'/>
+						<TechIcon href='.' src='/tech_icons/GodotIcon.png' className='m-2 brightness-0 w-20 h-20'/>
+                    </div>
 				</div>
 			</div>
 		</div>
