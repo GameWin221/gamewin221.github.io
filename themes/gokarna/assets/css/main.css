@@ -504,6 +504,7 @@ table td {
    *  "September 22, 2022"
    */
   width: 73%;
+  font-size: 200%;
 }
 .tags-list .post-tags {
   margin-top: 50px;

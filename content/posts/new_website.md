@@ -1,7 +1,7 @@
 ---
-title: "A new website"
+title: "New website"
 date: 2024-03-07T19:30:00+01:00
-description: "The journey of making my new website wasn't as straightforward as I wanted it to be."
+description: "The (not so simple) journey of making my new website."
 tags: ["web"]
 type: post
 weight: 0
