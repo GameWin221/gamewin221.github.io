@@ -1,0 +1,199 @@
+---
+title: "The importance of strong types"
+description: "Where weak types just aren't enough..."
+published: 'March 29 2025'
+cover: '/images/strongtypes.png'
+---
+
+import KaTeX from '../../components/KaTeX.astro'
+
+Write about Errors found in pipeline creation and the possibility of overloading functions for different types such as RenderAPI::bind_descriptor and push constant 
+
+## What are strong types?
+Since strong/weak type systems don't have precise definitions[[2]](#bibliography) I'd like to clarify how I differentiate between a strong type and a weak type:
+- **Strong type** - Usually a struct or a class that cannot be implicitly cast to a different type except for explicitly defined implicit type casts, eg.:
+```cpp
+template<typename T>
+struct Handle {
+    // The only allowed ways of constructing a Handle are:
+    // - zero-initializing by not supplying anything
+    // - by supplying u32 or a Handle of the same template type
+    Handle() = default; 
+    Handle(const u32 &other) : _internal(other) {}
+    Handle(const Handle &other) = default; 
+
+    Handle &operator=(const Handle &other) = default;
+    Handle &operator=(const u32 &other) {
+        _internal = other;
+        return *this;
+    }
+
+    bool operator==(const Handle &other) const {
+        return _internal == other._internal;
+    }
+    bool operator==(const u32 &other) const {
+        return _internal == other;
+    }
+
+    [[nodiscard]] u32 as_u32() const {
+        return _internal;
+    }
+
+    // The only way of casting the Handle into a different template type
+    template<typename U>
+    [[nodiscard]] Handle<U> into() const {
+        return Handle<U>(_internal);
+    }
+
+    u32 _internal{};
+};
+```
+
+- **Weak type** - Often a numerical type (pointers are also technically numbers) that can be implicitly cast to various types without explicitly allowing for such behavior, eg.:
+```cpp
+using Handle = uint32_t;
+```
+
+## The problem of using weak types
+Weak types can be implicitly cast to "incompatible" types and the simplest example of that is assigning an `int` to a `float`. Luckily such a conversion will result in a warning from the compiler because those two have clearly different precision. Same goes for assigning an `int64_t` to an `uint16_t` - you will get some kind of *"possible loss of data"* warning. 
+
+Weak types can also be implicitly cast to compatible types and that's usually a good thing but there are cases where you don't want that behavior. For example if you have a templated `Handle` type that mimics `uint32_t` like I did:
+
+```cpp
+template<typename T>
+using Handle = u32;
+```
+
+No matter what the template type is, all Handles can be implicitly cast without warnings between different template types and numerical types (and vice versa) as shown in the example below:
+
+```cs
+// Good effects of implicit casting
+Handle<Image> image_handle = 13;
+Handle<Buffer> buffer_handle = buffer_array.size(); // Quick way to assign a Handle
+
+...
+
+// Unwanted behavior that will not generate any warnings or errors:
+Handle<Image> image_handle = buffer_handle; // No warning, oops...
+// or
+image_handle = create_buffer(BufferCreateInfo{ ... }); // No warning, ops...
+```
+
+Assigning an Buffer handle to an Image handle and similar situations will be allowed and undetected by the compiler even though those are clearly catastrophic mistakes. Such mistakes may happen as your program gets more complicated and what's even worse - these remain undetected.
+
+## Strong types come to the rescue!
+Let's recall the strongly typed Handle above:
+```cpp
+template<typename T>
+struct Handle {
+    Handle() = default; 
+    Handle(const u32 &other) : _internal(other) {}
+    Handle(const Handle &other) = default; 
+
+    Handle &operator=(const Handle &other) = default;
+    Handle &operator=(const u32 &other) {
+        _internal = other;
+        return *this;
+    }
+
+    bool operator==(const Handle &other) const {
+        return _internal == other._internal;
+    }
+    bool operator==(const u32 &other) const {
+        return _internal == other;
+    }
+
+    [[nodiscard]] u32 as_u32() const {
+        return _internal;
+    }
+
+    template<typename U>
+    [[nodiscard]] Handle<U> into() const {
+        return Handle<U>(_internal);
+    }
+
+    u32 _internal{};
+};
+```
+
+All three constructors assure that a Handle can be created only in one of three following ways:
+- By supplying no parameters -> Creates a zero-initialized Handle
+- By supplying an integer -> Creates a Handle initalized by the supplied value
+- By supplying a Handle of **the same** template type -> Creates a Handle by copying the supplied value
+
+... and assign operators doing the same things.
+
+Comparison operators are rather self-explanatory and are only needed in case a Handle is hashed by STL containers.
+
+Now getting back to the strongly-typed part:
+- `[[nodiscard]] u32 as_u32() const` is the only way of reading a Handle as `u32` (except for reading `_interal` directly) 
+- `[[nodiscard]] Handle<U> into() const` is the only way of casting a Handle to a different template type
+
+Now armed with a strongly-typed Handle structure, we can go back to the problem we had when using weak types:
+```cs
+// Handles can be initialized with integers
+Handle<Image> image_handle = 13;
+Handle<Buffer> buffer_handle = buffer_array.size(); // Quick way to assign a Handle
+
+...
+
+// Both won't work due to buffer_handle being of different type than image_handle
+Handle<Image> image_handle = buffer_handle; // Error
+// or
+image_handle = create_buffer(BufferCreateInfo{ ... }); // Error, create_buffer returns Handle<Buffer>
+```
+
+With this, you can't accidentally use mismatching types. This doesn't mean that you can't - you just have to do it explicitly:
+
+```cs
+// 
+Handle<Image> image_handle = buffer_handle.into();
+```
+
+#### The benefits of using strong types in Gemino[[3]](#bibliography)
+The first thing I noticed after changing to strongly-typed Handles was this bug where `destroy_compute_pipeline()` expected wrong type of Handles:
+
+![error1](/images/strongtype1.png)
+
+Even though this was the only place in the codebase where incorrect types were used, thanks to explicit type casting of Handles no such bug will ever appear in the future.
+
+So if this is not the greatest benefit then what is? - Proper function overloading[[4]](#bibliography)!
+
+By "proper" function overloading I mean one where C++ can actually differentiate between different types of Handles. In the case of weak-typed Handles all template types boiled down to plain `uint32_t` so template types did not matter at all - effectively making overloading impossible:
+```cpp
+void foo(Handle<Buffer> handle) { ... };
+void foo(Handle<Image> handle) { ... };
+```
+
+^ this is the same thing as:
+
+```cpp
+void foo(uint32_t handle) { ... };
+void foo(uint32_t handle) { ... }; // Error, foo(uint32_t handle) is defined twice
+```
+
+But now with strongly-typed Handles, template types actually make a difference because Handles are structs. 
+
+This possibility allowed me to create overloads of `destroy(...)` and `get_data(...)` for each template type of a Handle:
+
+![benefit1](/images/strongtype3.png)
+
+Which is quite convenient because now I can just write `resource_manager->destroy(some_handle);` or `auto image_data = resource_manager->get_data(some_image_handle);` without worrying about the Handle type.
+
+Same goes for rendering functions that behave differently for graphics and compute pipelines:
+
+![benefit2](/images/strongtype4.png)
+
+#### Safety comes at a cost of more verbosity
+It may seem like a downside to some people but I personally like seeing a Handle's type and the intention behind further usage of it clearly in code: 
+
+![notpretty1](/images/strongtype2.png)
+
+Red marks the removed old code and green marks the newly added code:
+![notpretty2](/images/strongtype5.png)
+
+### Bibliography
+1. [Muscular arm cover image](https://www.istockphoto.com/pl/zdj%C4%99cie/m%C4%99skie-rami%C4%99-z-du%C5%BCymi-mi%C4%99%C5%9Bniami-z-bliska-izolowane-na-bia%C5%82ym-tle-widok-z-ty%C5%82u-gm1339195913-419596871), [iStock Photos]
+2. [Strong and weak typing](https://en.wikipedia.org/wiki/Strong_and_weak_typing), [Wikipedia]
+3. [My Gemino Engine](https://github.com/GameWin221/Gemino), [Github]
+4. [Function Overloading](https://learn.microsoft.com/en-us/cpp/cpp/function-overloading), [Microsoft Learn]
