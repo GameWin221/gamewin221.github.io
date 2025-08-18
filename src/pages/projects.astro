@@ -80,14 +80,32 @@ import ScrollToTop from '../components/ScrollToTop.astro';
 					</li>
 
 					<li>
+						<a href='https://github.com/GameWin221/Jack2Digital'>
+							<img src="/images/Jack2Digital.jpg" alt="jack2digital" />
+							<h3 class="title">Jack2Digital</h3>
+							<h5 class="date">2025</h5>
+						</a>
+						<div class="desc">
+							<p>Personal project I started in order to eventually be able to play my digital piano (that only has an analog Jack output) in silence.</p>
+							<p>Soon turned out to be a cool project I can learn new things from and one which I can work on improving the sample audio quality on and on.</p>
+							<p>I had no idea about analog audio when I started this project so there were major improvements to the circuit along the way as I learned more.</p>
+						</div>
+					</li>
+
+					<div class="spacer"/>
+
+					<li>
 						<a href='https://github.com/GameWin221/picar'>
-							<img src="/images/picar.jpg" alt="picar" />
+							<img src="/images/picarnew.jpg" alt="picar" />
 							<h3 class="title">PiCar</h3>
 							<h5 class="date">2025</h5>
 						</a>
 						<div class="desc">
 							<p>Little car made from scratch with autonomous and remote-controlled capabilities using Raspberry Pi 5.</p>
-							<p>It's my first project related to AI and computer vision thanks to the RPi Camera Module I used.</p>
+							<p>Features a CH32V003 chip on a custom PCB for PWM control. RPi 5 communicates with the chip over I2C using a simple register-&gt;value protocol. </p>
+							<p>The frame, the steering system and wheel mounts are all 3D printed parts assembled together either with LEGO-inspired pins or M3 screws.</p>
+							<p>It's my first project related to computer vision which I used to implement the aforementioned autonomous capabilities. The source video feed comes straight from the RPi Camera Module 2 that is mounted on the car and is being analyzed in real time.</p>
+							<p>There also is the <b><i>fun</i></b> manual mode in which the user can steer the car from their PC with a gamepad while viewing the live video feed from the car's camera.</p>
 						</div>
 					</li>
 
