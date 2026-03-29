@@ -11,6 +11,6 @@ export default defineConfig({
 			theme: 'dark-plus' // monokai, dark-plus or default
 		}
 	},
-	site: 'https://gamewin221.github.io',
+	site: 'https://gemyhn.github.io',
 	integrations: [mdx(), sitemap()],
 });
