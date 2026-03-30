@@ -11,6 +11,6 @@ export default defineConfig({
 			theme: 'dark-plus' // monokai, dark-plus or default
 		}
 	},
-	site: 'https://gemyhn.github.io',
+	site: 'https://ghemyn.github.io',
 	integrations: [mdx(), sitemap()],
 });
