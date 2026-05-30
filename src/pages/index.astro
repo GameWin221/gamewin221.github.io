@@ -4,6 +4,35 @@ import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 import SocialLinks from '../components/SocialLinks.astro';
+import { getCollection } from 'astro:content';
+import Project from '../components/Project.astro';
+import BlogPost from '../components/BlogPost.astro';
+
+function parseDate(date: Date) {
+	if (date.getFullYear() === 9999) {
+		return 'Present';
+	}
+
+	return date.toLocaleString('en-US', { day: 'numeric', month: 'short', year: 'numeric' });
+}
+
+function parsePeriod(a: Date, b: Date) {
+	if (a.getFullYear() === b.getFullYear()) {
+		return a.toLocaleString('en-US', { day: 'numeric', month: 'short' }) + ' - ' + b.toLocaleString('en-US', { day: 'numeric', month: 'short', year: 'numeric' });
+	}
+	return parseDate(a) + ' - ' + parseDate(b);
+}
+
+type ProjectEntry = (typeof projects)[number];
+type BlogEntry = (typeof blogposts)[number];
+
+const projects = (await getCollection('projects')).sort(
+	(a: ProjectEntry, b: ProjectEntry) => b.data.creationDate.valueOf() - a.data.creationDate.valueOf(),
+);
+
+const blogposts = (await getCollection('blog')).sort(
+	(a: BlogEntry, b: BlogEntry) => b.data.published.valueOf() - a.data.published.valueOf(),
+);
 ---
 
 <!doctype html>
@@ -12,93 +41,525 @@ import SocialLinks from '../components/SocialLinks.astro';
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 		<style>
 			body {
-				display: flex;
-				flex-direction: column;
-				flex-wrap: nowrap;
 				min-height: 100vh;
-			}
-			main {
+                width: 100%;
+                top: 0;
+                left: 0;
+                margin: 0;
+                padding: 0;
 				display: flex;
 				flex-direction: column;
+				/* background:
+					radial-gradient(circle at 8% 12%, rgba(41, 134, 255, 0.18), transparent 24%),
+					radial-gradient(circle at 84% 0%, rgba(108, 172, 255, 0.16), transparent 20%),
+					linear-gradient(180deg, rgba(241, 246, 255, 0.98) 0%, rgba(255, 255, 255, 1) 42%); */
+			}
+
+			main {
+				position: relative;
+				width: min(1220px, calc(100% - 2rem));
+				margin-inline: auto;
+				padding-top: 4.5rem;
+				padding-bottom: 4rem;
+				display: flex;
+				flex-direction: column;
+                flex-wrap: nowrap;
+				gap: 4rem;
+				align-items: start;
+				isolation: isolate;
+			}
+
+			.hero {
+				grid-column: 1 / -1;
+				display: flex;
+				flex-direction: row;
+				align-items: start;
+				gap: 4rem;
+				justify-content: space-between;
+			}
+
+			.hero-left {
+				display: flex;
+				flex-direction: column;
+				gap: 0.5rem;
+				padding-top: 1rem;
+			}
+
+			.hero-right {
+				display: flex;
+                flex-direction: column;
 				align-items: center;
 				justify-content: center;
 			}
-			.my-name {
-				margin-top: 1rem;
-				text-align: center;
+
+			.hero-summary {
+				max-width: 36rem;
+				font-size: 1.08rem;
+				color: var(--main-text-color);
 			}
-			.my-nickname {
-				margin-top: -0.5rem;
-				margin-bottom: 2rem;
-				text-align: center;
+
+			.actions {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.85rem;
 			}
-			.my-role {
-				color: var(--accent);
-				margin-bottom: 1.35rem;
-			}
-			img {
-				max-height: 20em;
-				width: auto;
+
+			.button {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				padding: 0.92rem 1.25rem;
+				border-radius: 8px;
+				text-decoration: none;
+				font-weight: 600;
+				line-height: 1;
+				border: 1px solid transparent;
 				box-shadow: var(--box-shadow);
+				transition: transform 0.2s ease, box-shadow 0.2s ease, color 0.2s ease, background 0.2s ease;
 			}
+
+			.button:hover {
+				transform: translateY(-1px);
+			}
+
+			.button.primary {
+				background: linear-gradient(135deg, var(--accent), var(--accent-light));
+				color: white;
+			}
+			.button.primary:hover {
+	
+			}
+
+			.button.secondary {
+				background: rgba(255, 255, 255, 0.82);
+				border-color: rgba(41, 134, 255, 0.16);
+				color: var(--main-heading-color);
+			}
+			.button.secondary:hover {
+
+			}
+
+			.profile-frame {
+                display: grid;
+				gap: 1rem;
+				justify-items: center;
+
+				/* padding: 0.9rem;
+				border-radius: 14px;
+                border: 1px solid rgba(41, 134, 255, 0.2);
+				background: rgba(255, 255, 255, 0.78); */
+
+				/* background: linear-gradient(180deg, rgba(41, 134, 255, 0.16), rgba(255, 255, 255, 0.92));
+                backdrop-filter: blur(10px);
+                box-shadow: var(--box-shadow); */
+			}
+
+			.profile-frame img {
+				display: block;
+				height: 25.2rem;
+				/* height: auto; */
+				object-fit: cover;
+				border-radius: 6px;
+			}
+			
+			.my-name {
+				margin: 0;
+				font-size: clamp(2.9rem, 7vw, 5.6rem);
+				line-height: 0.95;
+				letter-spacing: -0.05em;
+			}
+
+			.my-nickname {
+				margin: 0;
+				text-align: center;
+                display: block;
+				color: var(--accent);
+			}
+
+            .my-role-container {
+                display: flex;
+                justify-content: flex-start;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            .my-role {
+                padding-top: 0.55rem;
+				color: var(--accent);
+				font-style: italic;
+			}
+
+			.profile-note {
+				margin: 0;
+				max-width: 20rem;
+				text-align: center;
+				font-size: 0.98rem;
+			}
+
+			.highlights {
+				grid-column: 1 / -1;
+				display: grid;
+				grid-template-columns: repeat(3, minmax(0, 1fr));
+				align-items: start;
+				gap: 1rem;
+				margin-top: 0.5rem;
+			}
+
+			.card {
+				padding: 1.2rem;
+				border-radius: 12px; 
+				background: rgba(255, 255, 255, 0.8);
+				border: 1px solid rgba(14, 44, 82, 0.2);
+				box-shadow: var(--box-shadow);
+				align-self: start;
+			}
+
+			.card h3 {
+				margin-bottom: 0.35rem;
+				font-size: 1.1rem;
+				color: var(--main-heading-color);
+			}
+
+			.card p {
+				margin: 0;
+				font-size: 0.95rem;
+			}
+
+			.intro {
+				grid-column: 1 / -1;
+				margin-top: 1rem;
+			}
+
+			.intro h2 {
+				margin-bottom: 0.8rem;
+				font-size: 1.55rem;
+			}
+
+			.techstack {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.75rem;
+				margin-top: 1rem;
+			}
+
+			.techstack img {
+				max-width: 5rem;
+				max-height: 2.8rem;
+				margin: auto;
+			}
+			.blogposts-container {
+				width: 100%;
+				display: flex;
+				flex-direction: column;
+				gap: 0.5rem;
+			}
+
+			.blogposts-header {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: 1rem;
+				margin-bottom: 1rem;
+			}
+
+			.blogposts-header h3 {
+				margin: 0;
+			}
+
+			.blogposts-link {
+				color: var(--accent);
+				font-weight: 600;
+				text-decoration: none;
+				white-space: nowrap;
+			}
+
+			.blogposts-link:hover {
+				text-decoration: underline;
+			}
+
+			section {
+				width: 100%;
+			}
+
+			#projects {
+				scroll-margin-top: 5.5rem;
+			}
+
+			h1 {
+				font-size: clamp(2.5rem, 5vw, 4.5rem);
+				line-height: 1;
+			}
+
+			p {
+				font-size: 1.05rem;
+			}
+
+			ul {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+				align-items: start;
+				list-style-type: none;
+				gap: 1.5rem;
+				margin: 0;
+				padding: 0;
+			}
+
+			.project-meta {
+				margin: 0 0 0.75rem;
+				font-size: 0.9rem;
+				font-weight: 600;
+				letter-spacing: 0.08em;
+				text-transform: uppercase;
+				color: var(--accent);
+			}
+
+			.project-meta span {
+				color: var(--alt-heading-color);
+			}
+
+			.project-note {
+				margin-top: 1.5rem;
+				color: var(--alt-heading-color);
+				font-style: italic;
+				text-align: center;
+			}
+
 			@media (max-width: 960px) {
-				img {
-					max-height: 16em;
+				main {
+					width: calc(100% - 1rem);
+					padding-top: 0.8rem;
+					padding-bottom: 2rem;
+				}
+
+				main::before {
+					inset: 0.5rem 0 auto;
+					height: 18rem;
+				}
+
+				ul {
+					grid-template-columns: repeat(auto-fit, 100%);
+					gap: 1.5rem;
+				}
+
+				.actions,
+				.links {
+					justify-content: center;
+				}
+
+				.hero {
+					flex-direction: column;
+					gap: 1rem;
+				}
+
+				.hero-left,
+				.hero-right {
+					width: 100%;
+				}
+
+				.hero-summary {
+					align-self: center;
+					
+				}
+
+				.hero-right {
+					justify-content: center;
+				}
+
+				.highlights {
+					grid-template-columns: 1fr;
+				}
+
+				.profile-panel img {
+					width: min(100%, 18rem);
+				}
+				.my-name {
+					margin: 0;
+					text-align: center;
+					font-size: 10vw;
+				}
+
+				.my-nickname {
+					margin: 0;
+					text-align: center;
+            	    display: block;
+					color: var(--accent);
+				}
+
+				.my-role-container {
+					display: flex;
+					flex-direction: column;
+					justify-content: center;
+					align-items: center;
+					gap: 0rem;
+				}
+				.my-role-container > :nth-child(2) {
+					display: none;
+				}
+
+				.tech-icon {
+					width: 3rem;
+				}
+
+            	.my-role {
+            	    padding-top: 0.55rem;
+					color: var(--accent);
+					font-style: italic;
+					font-size: 1.65rem;
 				}
 			}
 		</style>
 	</head>
 	<body>
-		<Navbar/>
+		<Navbar />
 		<main>
-			<img src="/images/profile.png" alt="Profile picture"/>
-			<h2 class="my-name">Mateusz Antkiewicz</h2>
-			<h4 class="my-nickname"><i>aka 'ghemyn'</i></h4>
-			<h5 class="my-role">_</h5>
-			<SocialLinks/>
+			<section class="hero">
+                <!-- <div class="hero-right">
+			        <aside class="profile-frame">
+			            <img src="/images/face.png" alt="Profile picture" />
+			        </aside>
+                </div> -->
+				<div class="hero-left">
+				    <h1 class="my-name">Mateusz Antkiewicz</h1>
+                    <div class="my-role-container">
+                        <h2 class="my-nickname"><i>'ghemyn'</i></h2>
+                        <h2 class="my-nickname">-</h2>
+                        <h3 class="my-role">_</h3>
+                    </div>
+                    
+				    <p class="hero-summary">I love understanding systems deeply and using that knowledge to build fast, reliable software. My work spans multiple domains, but efficiency remains the common denominator. I care about performance, implementation detail, and the parts of software that most people never see, but can definitely feel the impact of.</p>
+				    <div class="actions">
+				    	<a class="button primary" href="/#projects">View projects</a>
+				    	<a class="button secondary" href="/blog/">Read the blog</a>
+				    </div>
+				    
+                </div>
+			</section>
+            
+            <div>
+                <h5 style="margin-bottom: 1rem; color: var(--main-text-color);">I'm passionate about . . .</h5> 
+			    <section class="highlights" aria-label="Core interests">
+			    	<div class="card">
+			    		<h3>Graphics & Game Development</h3>
+			    		<p>GPU work, rendering, and anything visually interactive tends to land closest to my interests. Game development is what began my journey in programming.</p>
+						<div class="techstack">
+							<img src="/tech/vulkanbw.svg" alt="Vulkan" class="tech-icon" />
+							<img src="/tech/openglbw.svg" alt="OpenGL" class="tech-icon" />
+							<img src="/tech/wgpubw.svg" alt="WebGPU" class="tech-icon" />
+							<img src="/tech/unrealenginebw.svg" alt="Unreal Engine" class="tech-icon" />
+							<img src="/tech/unitybw.svg" alt="Unity" class="tech-icon" />
+						</div>
+			    	</div>
+			    	<div class="card">
+			    		<h3>Low level systems</h3>
+			    		<p>C, C++, Rust, and even x86 assembly are the tools I use to build efficient and performant software - and the only tools that let me have a solid understanding of what my code really does.</p>
+						<div class="techstack">
+							<img src="/tech/cbw.svg" alt="C" class="tech-icon" />
+							<img src="/tech/cppbw.svg" alt="C++" class="tech-icon" style="color: black;"/>
+							<img src="/tech/rustbw.svg" alt="Rust" class="tech-icon" />
+							<img src="/tech/assemblybw.svg" alt="Assembly" class="tech-icon" />
+						</div>
+			    	</div>
+			    	<div class="card">
+			    		<h3>Robotics & Embedded Systems</h3>
+			    		<p>Computer vision, embedded systems, PCB design and IoT are the areas that allow me to combine software and hardware development. Which is something I'm getting into more and more.</p>
+						<div class="techstack">
+							<img src="/tech/opencvbw.svg" alt="OpenCV" class="tech-icon" />
+							<img src="/tech/kicadbw.svg" alt="KiCad" class="tech-icon" />
+							<img src="/tech/raspberrypibw.svg" alt="Raspberry Pi" class="tech-icon" />
+							<img src="/tech/fusion360bw.svg" alt="Fusion 360" class="tech-icon" />
+						</div>
+			    	</div>
+			    </section>
+            </div>
 
-			<div class="spacer"/>
+			<div class="spacer"></div>
 
-			<h4>Let me introduce myself</h4>
-			<div class="introduce-myself">
-				<p>I'm passionate about graphics and GPU programming. Anything that is visual, fast or low-level is most likely my area of interest.</p>
-				<p>On a daily basis I use C++. It's the language I'm the most experienced and comfortable with however I also really enjoy Rust.</p>
-				<p>Speaking of low-level languages I can also read and write basic x64-x86 assembly. For other side-projects I use C# and Python.</p>
-				<p>Besides making software I also make some small IOT and Embedded projects. You can find them either in the posts or in the projects page.</p>
-			</div>
+		    <section id="projects">
+				<header>
+					<br>
+					<h1>Projects</h1>
+					<p>A chronological grid of what I have built, ordered from latest to earliest work.</p>
+				</header>
+				<ul>
+					{
+						projects.map((project: ProjectEntry) => (
+							<li>
+								
+								<p class="project-meta">{parsePeriod(project.data.creationDate, project.data.finishDate)}</p>
+								<Project
+									backgroundImage={project.data.backgroundImage}
+									title={project.data.title}
+									creationDate={project.data.creationDate}
+									finishDate={project.data.finishDate}
+									shortDescription={project.data.shortDescription}
+									longDescription={project.data.longDescription}
+									tags={project.data.tags}
+									socialMediaLink={project.data.socialMediaLink}
+								/>
+							</li>
+						))
+					}
+				</ul>
+				<p class="project-note">More projects are on the way.</p>
+			</section>
+
+			<div class="spacer"></div>
+
+			<div class="blogposts-container">
+	            	<div class="blogposts-header">
+	            		<h4 style="color: var(--main-text-color);">Latest blog posts</h4>
+	            		<a class="blogposts-link" href="/blog/">View all posts -&gt;</a>
+	            	</div>
+				{
+					blogposts.slice(0, 3).map((post: BlogEntry) => (
+						<BlogPost
+							backgroundImage={post.data.cover}
+							title={post.data.title}
+							published={post.data.published}
+							shortDescription={post.data.description}
+							tags={post.data.tags}
+							href={`/blog/${post.slug}/`}
+						/>
+					))
+				} 
+				<h3 style="text-align: center; color: grey;"><i>. . .</i></h3>
+            </div>
+            
 		</main>
-
 		<Footer />
 	</body>
 	<script>
 		const myRoles = ['Graphics Programmer', 'C++ Enjoyer', 'GPU Tinkerer', 'Occasional Rustacean', 'Embedded Hobbyist', 'Low Level Enthusiast', 'Is anyone here?'];
-		const roleElement = document.getElementsByClassName('my-role')[0] as HTMLParagraphElement;
-		
-		var displayedText = ''
+		const roleElement = document.querySelector('.my-role');
+		let displayedText = '';
 
 		function typeRole(roleID: number, direction: number, letterID: number = 0) {
 			const text = myRoles[roleID];
-			if (letterID === text.length) {
-				setTimeout(() => typeRole( roleID, -direction, letterID - direction), 3000)
-			} else if(letterID < 0) {
-				setTimeout(() => typeRole((roleID + 1) % myRoles.length, -direction, letterID - direction), 50)
-			} else {
-				if (direction === 1) {
-					displayedText += text[letterID];
-				} else if (direction === -1) {
-					displayedText = displayedText.substring(0, displayedText.length - 1);
-				}
 
-				if(letterID < text.length - 1) {
-					roleElement.textContent = displayedText + '|';
-				} else {
-					roleElement.textContent = displayedText;
-				}
-
-				setTimeout(() => typeRole(roleID, direction, letterID + direction), 50)
+			if (!roleElement) {
+				return;
 			}
+
+			if (letterID === text.length) {
+				setTimeout(() => typeRole(roleID, -direction, letterID - direction), 3000);
+				return;
+			}
+
+			if (letterID < 0) {
+				setTimeout(() => typeRole((roleID + 1) % myRoles.length, -direction, letterID - direction), 50);
+				return;
+			}
+
+			if (direction === 1) {
+				displayedText += text[letterID];
+			} else {
+				displayedText = displayedText.substring(0, displayedText.length - 1);
+			}
+
+			roleElement.textContent = (letterID < text.length - 1) ? `${displayedText}|` : displayedText;
+			setTimeout(() => typeRole(roleID, direction, letterID + direction), 50);
 		}
 
-		typeRole(0, 1)
+		typeRole(0, 1);
 	</script>
 </html>

@@ -1,0 +1,10 @@
+{
+  "backgroundImage": "/images/gravityAssistCover.png",
+  "title": "Gravity Assist",
+  "creationDate": "August 16 2024",
+  "finishDate": "August 20 2024",
+  "shortDescription": "2024 GMTK Game Jam entry - made in 4 days. The theme was \"BUILT TO SCALE\".",
+  "longDescription": "Game made by me and my friend in 96 hours for the 2024 GMTK Game Jam.\nThe theme was \"BUILT TO SCALE\" so the main goal of the game was to reach a space station by scaling nearby planets. The bigger the planet was, the stronger its gravity got. The game got it's name from an actual maneuver performed to change the direction and speed of a spacecraft, usually to save propellant.",
+  "tags": ["Game", "GameJam", "Godot"],
+  "socialMediaLink": "https://ghemyn.itch.io/gravity-assist"
+}

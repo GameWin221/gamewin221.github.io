@@ -1,0 +1,10 @@
+{
+  "backgroundImage": "https://user-images.githubusercontent.com/72656547/146827046-ea573b27-2290-4369-b4eb-f0441efe4526.png",
+  "title": "3D Model Inspector",
+  "creationDate": "Decemeber 10 2021",
+  "finishDate": "January 16 2022",
+  "shortDescription": "First bigger C++ project and first attempt at learning OpenGL. Inspects and visualizes 3D models.",
+  "longDescription": "First bigger C++ project and first attempt at learning OpenGL. Inspects and visualizes 3D models.",
+  "tags": ["C++", "OpenGL", "Graphics"],
+  "socialMediaLink": "https://github.com/ghemyn/3D-Model-Inspector"
+}

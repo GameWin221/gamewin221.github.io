@@ -1,0 +1,10 @@
+{
+  "backgroundImage": "/images/picogameconsole.png",
+  "title": "Pico Game Console",
+  "creationDate": "November 17 2023",
+  "finishDate": "December 22 2023",
+  "shortDescription": "Game console powered by Raspberry Pi Pico and an ST7735 LCD display. First generation version.",
+  "longDescription": "Game console powered by Raspberry Pi Pico and an ST7735 LCD display. First generation version.",
+  "tags": ["Embedded", "C++"],
+  "socialMediaLink": "https://github.com/ghemyn/PicoGameConsole"
+}

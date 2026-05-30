@@ -6,9 +6,12 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
 import { getCollection } from 'astro:content';
 import FormattedDate from '../../components/FormattedDate.astro';
 import ScrollToTop from '../../components/ScrollToTop.astro';
+import BlogPost from '../../components/BlogPost.astro';
+
+type BlogEntry = (typeof posts)[number];
 
 const posts = (await getCollection('blog')).sort(
-	(a, b) => b.data.published.valueOf() - a.data.published.valueOf(),
+	(a: BlogEntry, b: BlogEntry) => b.data.published.valueOf() - a.data.published.valueOf(),
 );
 ---
 
@@ -17,57 +20,41 @@ const posts = (await getCollection('blog')).sort(
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 		<style>
-			main {
-				width: 960px;
+			body {
+				min-height: 100vh;
+                width: 100%;
+                top: 0;
+                left: 0;
+                margin: 0;
+                padding: 0;
+				display: flex;
+				flex-direction: column;
 			}
-			h2 {
-				text-align: center;
+			main {
+				position: relative;
+				width: min(1220px, calc(100% - 2rem));
+				/* margin-inline: auto;
+				padding-top: 4.5rem;
+				padding-bottom: 4rem;
+				display: flex;
+				flex-direction: column;
+                flex-wrap: nowrap;
+				gap: 4rem;
+				align-items: start;
+				isolation: isolate; */
 			}
 			ul {
 				display: flex;
 				align-items: center;
 				flex-direction: column;
-				gap: 2rem;
-				list-style-type: none;
-				margin: 0;
-				padding: 0;
-			}
-			ul li {
-				width: 90%;
-			}
-			ul li * {
-				text-decoration: none;
-				transition: 0.2s ease;
-			}
-			ul li img {
-				margin-bottom: 0.5rem;
-				border-radius: 12px;
-				box-shadow: var(--box-shadow);
-			}
-			ul li a {
-				display: flex;
-				flex-direction: row;
 				flex-wrap: nowrap;
 				gap: 1rem;
+				list-style-type: none;
+
+				padding: 0;
 			}
-			.title {
-				margin: 0;
-				color: var(--main-heading-color);
-				line-height: 1;
-			}
-			.date {
-				margin: 0;
-				color: var(--alt-heading-color);
-			}
-			ul li a:hover h4,
-			ul li a:hover h5,
-			ul li a:hover h6 {
-				color: var(--accent-light);
-			}
-			ul a:hover img {
-				box-shadow: var(--box-shadow-accent);
-			}
-			@media (max-width: 960px) {
+
+			@media (max-width: 1000px) {
 				ul {
 					gap: 0.5em;
 				}
@@ -85,28 +72,21 @@ const posts = (await getCollection('blog')).sort(
 	<body>
 		<Navbar />
 		<main>
-			<h2>Take your time.</h2>
+			<h2 style="text-align: center;">Take your time.</h2>
 
 			<ul>
 				{
-					posts.map((post) => (
-						<div class="spacer"/>
-
-						<li class="post">
-							<a href={`/blog/${post.slug}/`}>
-								<img width={400} src={post.data.cover} alt="" />
-								<div>
-									<h4 class="title">{post.data.title}</h4>
-									<h5 class="date">
-										<FormattedDate date={post.data.published} />
-									</h5>
-									<br/>
-									<h6>{post.data.description}</h6>
-								</div>
-							</a>
-						</li>
+					posts.map((post: BlogEntry) => (
+						<BlogPost
+							backgroundImage={post.data.cover}
+							title={post.data.title}
+							published={post.data.published}
+							shortDescription={post.data.description}
+							tags={post.data.tags}
+							href={`/blog/${post.slug}/`}
+						/>
 					))
-				}
+				} 
 			</ul>
 		</main>
 		

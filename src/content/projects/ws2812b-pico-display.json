@@ -1,0 +1,10 @@
+{
+  "backgroundImage": "/images/ws2812b.jpg",
+  "title": "WS2812B Pico Display",
+  "creationDate": "May 27 2024",
+  "finishDate": "July 27 2024",
+  "shortDescription": "16x16 WS2812B matrix display controlled by a Raspberry Pi Pico W.",
+  "longDescription": "It's both a usable decoration for my room and a project to learn more about embedded-specific things (lwip TCP networking, flash memory, timers, etc.",
+  "tags": ["Embedded", "IoT", "Electronics", "3D Printing"],
+  "socialMediaLink": "https://github.com/ghemyn/PicoWS2812B"
+}

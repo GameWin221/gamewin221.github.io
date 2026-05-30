@@ -1,0 +1,10 @@
+{
+  "backgroundImage": "https://user-images.githubusercontent.com/72656547/182173442-0d863f3c-ef96-4ec9-ab1b-0ae1a62b3b4e.jpg",
+  "title": "Eruption Engine",
+  "creationDate": "April 2 2022",
+  "finishDate": "July 20 2023",
+  "shortDescription": "First attempt at making a rendering engine using Vulkan. Ended up as a wannabe-game-engine with significant time investment.",
+  "longDescription": "First attempt at making a rendering engine using Vulkan. Ended up as a wannabe-game-engine with significant time investment.",
+  "tags": ["Graphics", "Vulkan", "C++"],
+  "socialMediaLink": "https://github.com/ghemyn/Eruption-Engine"
+}

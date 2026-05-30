@@ -1,0 +1,10 @@
+{
+  "backgroundImage": "/images/ballsjourney.png",
+  "title": "Ball's Journey: Into Space",
+  "creationDate": "May 22 2021",
+  "finishDate": "July 14 2021",
+  "shortDescription": "Personal mobile game released on Google Play store. A journey through space in ball form.",
+  "longDescription": "Personal mobile game released on Google Play store. A journey through space in ball form.",
+  "tags": ["Game", "Unity", "Mobile"],
+  "socialMediaLink": "/blog/the_retirement_of_my_game"
+}

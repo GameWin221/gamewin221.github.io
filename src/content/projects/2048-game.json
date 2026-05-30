@@ -1,0 +1,10 @@
+{
+  "backgroundImage": "/images/2048game.png",
+  "title": "2048 Game",
+  "creationDate": "January 23 2022",
+  "finishDate": "February 28 2022",
+  "shortDescription": "A clone of the well-known 2048 game. Project for learning OpenGL and game engine architecture.",
+  "longDescription": "A clone of the well-known 2048 game. Project for learning OpenGL and game engine architecture.",
+  "tags": ["Game", "OpenGL", "Graphics", "C++"],
+  "socialMediaLink": "https://github.com/ghemyn/2048-Game"
+}

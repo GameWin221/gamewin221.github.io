@@ -1,0 +1,10 @@
+{
+  "backgroundImage": "/images/picogameconsole2.png",
+  "title": "Pico Game Console 2",
+  "creationDate": "April 20 2024",
+  "finishDate": "April 21 2024",
+  "shortDescription": "Remastered the previous game console, now with a custom PCB.",
+  "longDescription": "A much-improved version of the previous generation game console, now with a custom PCB. Still powered with Raspberry Pi Pico!",
+  "tags": ["Embedded", "PCB", "C++"],
+  "socialMediaLink": "https://github.com/ghemyn/PicoGameConsole"
+}

@@ -1,0 +1,191 @@
+---
+import { ProjectTag, tagColors, hexToRgba } from '../types/projectTags';
+import '@fortawesome/fontawesome-free/css/fontawesome.css';
+import '@fortawesome/fontawesome-free/css/brands.css';
+import '@fortawesome/fontawesome-free/css/solid.css';
+
+interface Props {
+	backgroundImage: string;
+	title: string;
+	published: Date;
+	shortDescription: string;
+	tags: (ProjectTag | string)[];
+	href: string;
+}
+
+const { backgroundImage, title, published, shortDescription, tags, href } = Astro.props;
+---
+
+<a href={href} class="blogpost-card">
+	<div class="blogpost-background" style={`background-image: url(${backgroundImage})`}></div>
+
+	<div class="blogpost-content">
+		<div class="blogpost-header">
+			<h3 class="blogpost-title">{title}</h3>
+			<span class="blogpost-date"><span class="fa-solid fa-calendar-days"></span> {published.toLocaleDateString()}</span>
+		</div>
+
+		<div class="blogpost-tags">
+			{
+				tags.map(tag => {
+					const base = tagColors[tag] || tagColors[tag as ProjectTag] || '#c0c0c0';
+					return (
+					<span 
+						class="tag" 
+						style={
+							`background-color: ${hexToRgba(base, 0.3)}; 
+							color: ${hexToRgba(base, 1)}; 
+							border-color: ${hexToRgba(base, 1)};
+						`}>
+						{tag}
+						</span>
+					);
+				})
+			}
+		</div>
+
+		<p class="blogpost-description">{shortDescription}</p>
+	</div>
+</a>
+
+<style>
+	.blogpost-card {
+		display: flex;
+		position: relative;
+		width: 100%;
+		min-height: 11rem;
+		border-radius: 12px;
+		overflow: hidden;
+		text-decoration: none;
+		cursor: pointer;
+		transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: 1px solid rgba(14, 44, 82, 0.2);
+		box-shadow: var(--box-shadow);
+        margin-bottom: 1rem;
+	}
+
+	.blogpost-card:hover {
+		transform: translateY(-4px);
+		box-shadow: var(--box-shadow-accent);
+	}
+
+	.blogpost-background {
+		flex: 0 0 30%;
+		min-width: 12rem;
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
+		align-self: stretch;
+	}
+
+	.blogpost-content {
+		flex: 1;
+		min-width: 0;
+        padding: 1rem;
+		padding-left: 2rem;
+		padding-right: 2rem;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		gap: 0.9rem;
+		z-index: 1;
+		color: black;
+	}
+
+	.blogpost-content::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		pointer-events: none;
+	}
+
+	.blogpost-content > * {
+		position: relative;
+		z-index: 1;
+	}
+
+	.blogpost-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-start;
+		gap: 1rem;
+	}
+
+	.blogpost-title {
+		margin: 0;
+		font-size: 1.5rem;
+		font-weight: 700;
+		color: rgb(0, 0, 0);
+		flex: 1;
+		line-height: 1.2;
+	}
+
+	.blogpost-date {
+		font-size: 1.1rem;
+		color: var(--accent);
+		font-weight: 600;
+		white-space: nowrap;
+	}
+
+	.blogpost-tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+	}
+
+	.blogpost-description {
+		margin: 0;
+		font-size: 1.1rem;
+		color: rgba(0, 0, 0, 0.9);
+		line-height: 1.5;
+		display: -webkit-box;
+		-webkit-line-clamp: 3;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+	}
+
+	.tag {
+		display: inline-block;
+		padding: 0.3rem 0.6rem;
+		background-color: rgba(255, 255, 255, 0.1);
+		border: 1px solid;
+		border-radius: 6px;
+		font-size: 0.85rem;
+		font-weight: 600;
+		white-space: nowrap;
+		transition: background-color 0.2s ease, color 0.2s ease;
+	}
+
+	.blogpost-card:hover .tag {
+		background-color: rgba(255, 255, 255, 0.2);
+	}
+
+	@media (max-width: 960px) {
+		.blogpost-card {
+			flex-direction: column;
+			min-height: 0;
+		}
+
+		.blogpost-background {
+			flex-basis: auto;
+			width: 100%;
+			min-width: 0;
+			aspect-ratio: 16 / 9;
+		}
+
+		.blogpost-title {
+			font-size: 1.25rem;
+		}
+
+		.blogpost-description {
+			font-size: 0.85rem;
+			-webkit-line-clamp: 2;
+		}
+
+		.tag {
+			font-size: 0.7rem;
+			padding: 0.35rem 0.6rem;
+		}
+	}
+</style>
+

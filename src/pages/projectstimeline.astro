@@ -1,0 +1,291 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import Project from '../components/Project.astro';
+import { ProjectTag } from '../types/projectTags';	
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import ScrollToTop from '../components/ScrollToTop.astro';
+import { getCollection } from 'astro:content';
+
+function parseDate(date: Date) {
+	if (date.getFullYear() === 9999) {
+		return 'Present';
+	}
+
+	return date.toLocaleString('en-US', { day: 'numeric', month: 'short', year: 'numeric' });
+}
+
+function parsePeriod(a: Date, b: Date) {
+	if (a.getFullYear() === b.getFullYear()) {
+		return a.toLocaleString('en-US', { day: 'numeric', month: 'short' }) + ' - ' + b.toLocaleString('en-US', { day: 'numeric', month: 'short', year: 'numeric' });
+	}
+	return parseDate(a) + ' - ' + parseDate(b);
+}
+
+type ProjectEntry = (typeof projects)[number];
+
+const projects = (await getCollection('projects')).sort(
+	(a: ProjectEntry, b: ProjectEntry) => b.data.creationDate.valueOf() - a.data.creationDate.valueOf(),
+);
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<style>
+			body {
+				min-height: 100vh;
+                width: 100%;
+                top: 0;
+                left: 0;
+                margin: 0;
+                padding: 0;
+				display: flex;
+				flex-direction: column;
+			}
+			main {
+				width: 960px;
+				position: relative;
+			}
+			
+			ul {
+				display: flex;
+				flex-direction: column;
+				list-style-type: none;
+				align-items: center;
+				gap: 2rem;
+				margin: 0;
+				padding: 0;
+				position: relative;
+				padding-left: 4rem;
+			}
+
+			/* Timeline styles */
+			ul::before {
+				content: '';
+				position: absolute;
+				left: 1.5rem;
+				top: 0;
+				bottom: 0;
+				width: 2px;
+				background: rgba(41, 134, 255, 0.2);
+				z-index: 0;
+			}
+
+			ul::after {
+				content: '';
+				position: absolute;
+				left: 1.5rem;
+				top: 0;
+				width: 2px;
+				background: var(--accent);
+				z-index: 1;
+				height: var(--scroll-progress, 0%);
+				transition: height 0.1s ease-out;
+			}
+
+			ul li {
+				width: 100%;
+				position: relative;
+			}
+
+			/* Timeline milestone circles */
+			ul li::before {
+				content: '';
+				position: absolute;
+				left: -3.3rem;
+				top: 0;
+				width: 1.5rem;
+				height: 1.5rem;
+				border-radius: 50%;
+				background: white;
+				border: 2px solid rgba(41, 134, 255, 0.3);
+				z-index: 2;
+				transition: all 0.3s ease;
+			}
+
+			ul li.visible::before {
+				background: var(--accent);
+				border-color: var(--accent);
+				box-shadow: 0 0 0 3px rgba(41, 134, 255, 0.2);
+				transform: scale(1.1);
+			}
+
+			.timeline-label {
+				position: absolute;
+				right: calc(100% + 4.5rem);
+				left: auto;
+				top: -0.3rem;
+				opacity: 0.6;
+				transition: opacity 0.3s ease 0.1s;
+				white-space: nowrap;
+				font-size: 1.5rem;
+				color: var(--alt-heading-color);
+				font-weight: 600;
+				letter-spacing: 0.5px;
+				text-align: right;
+			}
+
+			.timeline-year {
+				top: -1.4rem;
+				font-size: 3rem;
+			}
+
+			ul li.visible .timeline-label {
+				opacity: 1;
+				color: var(--accent);
+			}
+			
+			ul li * {
+				transition: 0.2s ease;
+			}
+			ul li img {
+				margin-bottom: 0.5rem;
+				border-radius: 12px;
+			}
+			.desc {
+				color: var(--main-text-color);
+			}
+
+			.title,
+			.date {
+				margin: 0;
+				color: var(--accent)
+			}
+
+			ul li > a {
+				text-decoration: none;
+			}
+
+			ul li a:hover h3,
+			ul li a:hover h4,
+			ul li a:hover h5,
+			ul li a:hover h6 {
+				color: var(--accent-light);
+			}
+
+			ul a img {
+				max-height: 24em;
+				width: auto;
+				box-shadow: var(--box-shadow);
+			}
+			ul a:hover img {
+				box-shadow: var(--box-shadow-accent);
+			}
+			@media (max-width: 960px) {
+				ul {
+					gap: 0.6em;
+					padding-left: 3rem;
+				}
+
+				ul::before {
+					left: 1rem;
+				}
+
+				ul::after {
+					left: 1rem;
+				}
+
+				ul li::before {
+					left: -2.65rem;
+					width: 1.2rem;
+					height: 1.2rem;
+				}
+
+				.timeline-label {
+					right: auto;
+					font-size: 1.2rem;
+					left: calc(-0.5rem);
+					top: -1.6rem;
+					text-align: left;
+				}
+				.timeline-year {
+					top: -2.4rem;
+					font-size: 2rem;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<Navbar />
+		<main>
+			<section>
+				<!-- <h1 style="margin-bottom: 1em; text-align: center;">Projects</h1> -->
+				<div style="margin-bottom: 2rem;"></div>
+				<ul>
+					
+					<li style="text-align: center;"><div class="timeline-label timeline-year">Today</div>
+						<h4 style="color: var(--alt-heading-color);">More coming soon . . .</h4>
+					</li>
+					{
+						projects.map((project: ProjectEntry) => (
+							<li>
+								<div class="timeline-label">
+								{parsePeriod(project.data.creationDate, project.data.finishDate)}
+								</div>
+								<Project
+									backgroundImage={project.data.backgroundImage}
+									title={project.data.title}
+									creationDate={project.data.creationDate}
+									finishDate={project.data.finishDate}
+									shortDescription={project.data.shortDescription}
+									longDescription={project.data.longDescription}
+									tags={project.data.tags}
+									socialMediaLink={project.data.socialMediaLink}
+								/>
+							</li>
+						))
+					}
+				</ul>
+			</section>
+		</main>
+
+		<ScrollToTop/>
+		<Footer />
+		
+		<script>
+			//const today = new Date();
+			//const timelineYearElement = document.getElementsByClassName('timeline-year')[0];
+			//timelineYearElement.textContent = today.toLocaleString('default', { month: 'short', year: 'numeric' });
+
+			function updateTimeline() {
+				const listItems = document.querySelectorAll('ul li');
+				const ul = document.querySelector('ul');
+				const timelineMilestoneRadius = 14;
+
+				if (!ul) return;
+
+				const scrollBarRect = ul.getBoundingClientRect();
+
+				// Calculate scroll progress based on document scroll position
+				const scrollHeight = scrollBarRect.height - window.innerHeight / 2;
+				const scrolled = Math.min(window.scrollY + window.innerHeight * 0.35, scrollHeight);
+				const progress = scrollHeight > 0 ? (scrolled / scrollHeight) * 100 : 0;
+				ul.style.setProperty('--scroll-progress', progress + '%');
+				
+				const windowSpaceScrolled = scrollBarRect.top + scrollBarRect.height * (scrolled / scrollHeight);
+	
+				listItems.forEach((item, index) => {
+					const rect = item.getBoundingClientRect();
+					const itemMiddle = rect.top + timelineMilestoneRadius;
+					const windowCenter = window.innerHeight / 2;
+
+					// Mark item as visible if it's past the viewport center
+					if (itemMiddle <= windowSpaceScrolled) {
+						item.classList.add('visible');
+
+					} else {
+						item.classList.remove('visible');
+					}
+				});
+			}
+
+			// Update on scroll and load
+			window.addEventListener('scroll', updateTimeline, { passive: true });
+			window.addEventListener('load', updateTimeline);
+			updateTimeline(); // Initial call
+		</script>
+	</body>
+</html>

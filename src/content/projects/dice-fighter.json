@@ -1,0 +1,10 @@
+{
+  "backgroundImage": "/images/dicefighter.png",
+  "title": "Dice Fighter",
+  "creationDate": "July 15 2022",
+  "finishDate": "July 17 2022",
+  "shortDescription": "Top-down roguelike game made with a friend in 48 hours for 2022 GMTK Game Jam. ",
+  "longDescription": "The 2022 GMTK Game Jam theme was 'Roll of the Dice'.\nSimilar to Vampire Survivors.",
+  "tags": ["Game", "Unity", "GameJam"],
+  "socialMediaLink": "https://ghemyn.itch.io/dice-fighter"
+}

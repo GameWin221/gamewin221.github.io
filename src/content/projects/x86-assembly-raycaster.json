@@ -1,0 +1,10 @@
+{
+  "backgroundImage": "/images/raycaster.gif",
+  "title": "x86 64-bit Assembly Raycaster",
+  "creationDate": "July 16 2024",
+  "finishDate": "July 21 2024",
+  "shortDescription": "Raycaster made fully in x86  64-bit Assembly without the standard library on x64 Windows.",
+  "longDescription": "The project started out as a challenge where I wanted to make a \"3D\" rendered without ANY external libraries except for Windows OS calls which were used only for system-level operations.\nIt's a partial implementation of Lode Vandevenne's Raycasting Tutorial.\nAssembly learning project, low-level optimizations and basic SIMD. Trigonometric functions are implemented using the Taylor series.",
+  "tags": ["Assembly", "Graphics"],
+  "socialMediaLink": "https://github.com/ghemyn/x64Raycast"
+}

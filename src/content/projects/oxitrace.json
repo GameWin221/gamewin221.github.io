@@ -1,0 +1,10 @@
+{
+  "backgroundImage": "/images/oxitrace.png",
+  "title": "OxiTrace",
+  "creationDate": "April 8 2023",
+  "finishDate": "May 25 2023",
+  "shortDescription": "Raytracer made with Rust and Ash (Vulkan API for Rust). Partial implementation of the Ray Tracing In One Weekend tutorial.",
+  "longDescription": "Raytracer made with Rust and Ash (Vulkan API for Rust). Partial implementation of the Ray Tracing In One Weekend tutorial.",
+  "tags": ["Rust", "Raytracing", "Vulkan", "Graphics"],
+  "socialMediaLink": "https://github.com/ghemyn/oxi-trace"
+}

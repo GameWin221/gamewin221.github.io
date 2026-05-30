@@ -1,0 +1,10 @@
+{
+  "backgroundImage": "https://user-images.githubusercontent.com/72656547/213253052-80e923ca-bf12-468b-8061-5dea9737a4b3.png",
+  "title": "Rusticle Sim",
+  "creationDate": "January 14 2023",
+  "finishDate": "July 2023",
+  "shortDescription": "Particle Life simulation made in Rust. Inspired by Tom Mohr's video on particle systems and emergent behavior.",
+  "longDescription": "Particle Life simulation made in Rust. Inspired by Tom Mohr's video on particle systems and emergent behavior.",
+  "tags": ["Rust", "Simulation", "Optimization"],
+  "socialMediaLink": "https://github.com/ghemyn/rusticle_sim"
+}

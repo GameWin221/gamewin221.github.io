@@ -10,7 +10,7 @@
 	--alt-heading-color: #5e5e5e;
 	--main-text-color: #3b3b3b;
 
-	--box-shadow: 0 2px 6px rgba(40, 40, 40, 25%), 0 8px 12px rgba(40, 40, 40, 20%);
+	--box-shadow: 0 2px 4px rgba(40, 40, 40, 10%), 0 8px 12px rgba(40, 40, 40, 15%);
 	--box-shadow-accent: 0 2px 6px rgba(122, 151, 248, 25%), 0 8px 24px rgba(122, 151, 248, 33%), 0 16px 32px rgba(122, 151, 248, 33%);
 }
 body {
@@ -27,6 +27,11 @@ body {
 	line-height: 1.5;
 	color: var(--main-text-color);
 }
+
+html {
+	scroll-behavior: smooth;
+}
+
 main {
 	width: 960px;
 	max-width: calc(100% - 2em);
@@ -44,15 +49,12 @@ h6 {
 }
 
 h1,
-h2 {
-	color: var(--main-heading-color);
-}
-
+h2,
 h3,
 h4,
 h5,
 h6 {
-	color: var(--alt-heading-color);
+	color: var(--main-heading-color);
 }
 
 p {
@@ -105,7 +107,7 @@ table {
 img {
 	max-width: 100%;
 	height: auto;
-	border-radius: 8px;
+	border-radius: 6px;
 }
 code {
 	padding: 2px 5px;
