@@ -27,6 +27,11 @@ function getProjectDuration(startDate: Date, endDate: Date): string {
 	}
 }
 
+function isVideoBackground(background: string): boolean {
+	const path = background.split('?')[0].split('#')[0].toLowerCase();
+	return /\.(mp4|webm|mov|m4v)$/.test(path);
+}
+
 interface Props {
 	backgroundImage: string;
 	title: string;
@@ -51,11 +56,21 @@ const {
 	aspectRatio = 'default',
 } = Astro.props;
 
+const useVideoBackground = isVideoBackground(backgroundImage);
+
 
 ---
 
 <a target="_blank" href={socialMediaLink} class={`project-card${isOngoing(finishDate) ? ' highlighted-project' : ''}`} style={`${aspectRatio === 'default' ? '' : ('aspect-ratio: ' + aspectRatio + ';')}`}>
-	<div class="project-background" style={`background-image: url(${backgroundImage})`}></div>
+	{
+		useVideoBackground ? (
+			<video class="project-background project-background-video" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
+				<source src={backgroundImage} type="video/mp4"/>
+			</video>
+		) : (
+			<div class="project-background" style={`background-image: url(${backgroundImage})`}></div>
+		)
+	}
 
 	<div class="project-content">
 		<div class="project-copy">
@@ -156,9 +171,14 @@ const {
 		height: 100%;
 		background-size: cover;
 		background-position: center;
+		background-repeat: no-repeat;
 		z-index: 0;
 		/* box-shadow: inset 0 0 40px 2px rgba(0, 0, 0, 0.4); */
 		/* background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)); */
+	}
+
+	.project-background-video {
+		object-fit: cover;
 	}
 
 	.project-background::before {
