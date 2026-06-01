@@ -5,6 +5,6 @@
   "finishDate": "9999",
   "shortDescription": "High performance GPU-driven rendering engine designed for dynamic applications. ",
   "longDescription": "Passion project for learning and experimenting with graphics programming.",
-  "tags": ["Graphics", "Vulkan", "Optimization", "C++"],
+  "tags": ["Graphics", "Vulkan", "C++"],
   "socialMediaLink": "https://github.com/ghemyn/Gemino"
 }

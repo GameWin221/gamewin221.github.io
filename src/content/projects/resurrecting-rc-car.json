@@ -5,6 +5,6 @@
   "finishDate": "May 3 2024",
   "shortDescription": "\"Resurrected\" an old 10+ year old RC car.",
   "longDescription": "A fun idea I got after my dad had found my old (10+ years old) RC car. Turns out that making an RC car almost from scratch is not that hard...",
-  "tags": ["Embedded", "Robotics", "Electronics", "C++"],
+  "tags": ["Robotics", "Embedded", "C++"],
   "socialMediaLink": "/blog/resurrection_of_an_rc_car/"
 }

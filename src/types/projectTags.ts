@@ -9,7 +9,6 @@ export enum ProjectTag {
 	Printing3D = "3D Printing",
 	SIMD = "SIMD",
 	Graphics = "Graphics",
-	Optimization = "Optimization",
 	Web = "Web",
 	Game = "Game",
 	GameJam = "GameJam",
@@ -20,12 +19,8 @@ export enum ProjectTag {
 	IoT = "IoT",
 	Simulation = "Simulation",
 	Rust = "Rust",
-	Raytracing = "Raytracing",
 	Vulkan = "Vulkan",
 	OpenGL = "OpenGL",
-	Mobile = "Mobile",
-	PCB = "PCB",
-	Electronics = "Electronics",
 }
 
 export const tagColors: Record<ProjectTag | string, string> = {
@@ -39,23 +34,18 @@ export const tagColors: Record<ProjectTag | string, string> = {
 	[ProjectTag.Printing3D]: "#FF6B9D",
 	[ProjectTag.SIMD]: "#C06C84",
 	[ProjectTag.Graphics]: "#a688ff",
-	[ProjectTag.Optimization]: "#a18f6d",
 	[ProjectTag.Web]: "#45B7D1",
 	[ProjectTag.Game]: "#FFEAA7",
 	[ProjectTag.GameJam]: "#DFE6E9",
     [ProjectTag.Godot]: "#00B894",
 	[ProjectTag.Unity]: "#00B894",
 	[ProjectTag.UnrealEngine5]: "#2778bb",
-	[ProjectTag.Assembly]: "#74B9FF",
+	[ProjectTag.Assembly]: "#e77451",
 	[ProjectTag.IoT]: "#00B894",
 	[ProjectTag.Simulation]: "#6C5CE7",
-	[ProjectTag.Rust]: "#e06e39",
-	[ProjectTag.Raytracing]: "#f17463",
-	[ProjectTag.Vulkan]: "#e25555",
+	[ProjectTag.Rust]: "#e9743d",
+	[ProjectTag.Vulkan]: "#6355e2",
 	[ProjectTag.OpenGL]: "#92c2e2",
-	[ProjectTag.Mobile]: "#2e7e35",
-	[ProjectTag.PCB]: "#FFA502",
-	[ProjectTag.Electronics]: "#1E90FF",
 };
 
 export function hexToRgba(input: string, alpha = 0.9) {

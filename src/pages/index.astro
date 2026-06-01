@@ -7,6 +7,7 @@ import SocialLinks from '../components/SocialLinks.astro';
 import { getCollection } from 'astro:content';
 import Project from '../components/Project.astro';
 import BlogPost from '../components/BlogPost.astro';
+import { ProjectTag, tagColors, hexToRgba } from '../types/projectTags';
 
 function parseDate(date: Date) {
 	if (date.getFullYear() === 9999) {
@@ -29,6 +30,8 @@ type BlogEntry = (typeof blogposts)[number];
 const projects = (await getCollection('projects')).sort(
 	(a: ProjectEntry, b: ProjectEntry) => b.data.creationDate.valueOf() - a.data.creationDate.valueOf(),
 );
+
+const projectTags = Object.values(ProjectTag) as ProjectTag[];
 
 const blogposts = (await getCollection('blog')).sort(
 	(a: BlogEntry, b: BlogEntry) => b.data.published.valueOf() - a.data.published.valueOf(),
@@ -253,6 +256,108 @@ const blogposts = (await getCollection('blog')).sort(
 				flex-direction: column;
 				gap: 0.5rem;
 			}
+
+				.project-filters {
+					display: flex;
+					flex-direction: column;
+					gap: 0.85rem;
+					margin: 1rem 0 1.4rem;
+					padding: 1rem;
+					border-radius: 14px;
+					background: rgba(255, 255, 255, 0.72);
+					border: 1px solid rgba(14, 44, 82, 0.12);
+					box-shadow: var(--box-shadow);
+				}
+
+				.project-filters summary {
+					list-style: none;
+					cursor: pointer;
+				}
+
+				.project-filters summary::-webkit-details-marker {
+					display: none;
+				}
+
+				.project-filters-header {
+					display: flex;
+					align-items: center;
+					justify-content: space-between;
+					gap: 1rem;
+					flex-wrap: wrap;
+				}
+
+				.project-filters summary .project-filter-state::after {
+					content: '▾';
+					display: inline-block;
+					margin-left: 0.5rem;
+					transition: transform 0.2s ease;
+				}
+
+				.project-filters[open] summary .project-filter-state::after {
+					transform: rotate(180deg);
+				}
+
+				.project-filters-header p {
+					margin: 0;
+					color: var(--main-text-color);
+				}
+
+				.project-filter-state {
+					font-size: 0.95rem;
+					color: var(--alt-heading-color);
+				}
+
+				.project-filter-chips {
+					display: flex;
+					flex-wrap: wrap;
+					gap: 0.65rem;
+					margin-bottom: 0.5rem;
+				}
+
+				.project-filter-chip {
+					appearance: none;
+					border: 1px solid rgba(120, 120, 120, 0.22);
+					border-radius: 999px;
+					padding: 0.55rem 0.9rem;
+					font: inherit;
+					font-size: 0.92rem;
+					font-weight: 600;
+					line-height: 1;
+					cursor: pointer;
+					background-color: rgba(120, 120, 120, 0.12);
+					color: var(--alt-heading-color);
+					transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+				}
+
+				.project-filter-chip:hover {
+					transform: translateY(-1px);
+				}
+
+				.project-filter-chip[data-active='true'] {
+					box-shadow: var(--box-shadow-accent);
+					transform: translateY(-1px);
+				}
+
+				.project-filter-reset {
+					align-self: flex-start;
+					border: none;
+					background: transparent;
+					padding: 0;
+					color: var(--accent);
+					font: inherit;
+					font-weight: 600;
+					cursor: pointer;
+				}
+
+				.project-filter-reset:hover {
+					color: var(--accent-light);
+				}
+
+				.project-filter-empty {
+					margin: 0.25rem 0 0;
+					color: var(--alt-heading-color);
+					font-style: italic;
+				}
 
 			.blogposts-header {
 				display: flex;
@@ -480,10 +585,36 @@ const blogposts = (await getCollection('blog')).sort(
 					<h1>Projects</h1>
 					<p>A chronological grid of what I have built, ordered from latest to earliest work.</p>
 				</header>
+				<details class="project-filters">
+					<summary class="project-filters-header" aria-label="Project tag filters">
+						<p>Filter by tag</p>
+						<p class="project-filter-state" data-filter-summary>Showing all projects</p>
+					</summary>
+					<div class="project-filter-chips">
+						{projectTags.map((tag) => {
+							const base = tagColors[tag] || '#c0c0c0';
+							return (
+								<button
+									type="button"
+									class="project-filter-chip"
+									data-project-filter
+									data-tag={tag}
+									data-base-color={base}
+									aria-pressed="false"
+								>
+									{tag}
+								</button>
+							);
+						})}
+					</div>
+					<button type="button" class="project-filter-reset" data-project-filter-reset>
+						Show all projects
+					</button>
+				</details>
 				<ul>
 					{
 						projects.map((project: ProjectEntry) => (
-							<li>
+							<li data-project-tags={project.data.tags.join('|')}>
 								
 								<p class="project-meta">{parsePeriod(project.data.creationDate, project.data.finishDate)}</p>
 								<Project
@@ -531,7 +662,76 @@ const blogposts = (await getCollection('blog')).sort(
 	<script>
 		const myRoles = ['Graphics Programmer', 'C++ Enjoyer', 'GPU Tinkerer', 'Occasional Rustacean', 'Embedded Hobbyist', 'Low Level Enthusiast', 'Is anyone here?'];
 		const roleElement = document.querySelector('.my-role');
+		const filterButtons = Array.from(document.querySelectorAll('[data-project-filter]')) as HTMLButtonElement[];
+		const filterResetButton = document.querySelector('[data-project-filter-reset]');
+		const filterSummary = document.querySelector('[data-filter-summary]');
+		const projectItems = Array.from(document.querySelectorAll('[data-project-tags]'));
+		const selectedTags = new Set<string>();
 		let displayedText = '';
+
+		function updateProjectFilters() {
+			const activeTags = Array.from(selectedTags);
+			let visibleCount = 0;
+
+			projectItems.forEach((item) => {
+				const projectItem = item as HTMLElement;
+				const tags = (item.getAttribute('data-project-tags') ?? '').split('|').filter(Boolean);
+				const matches = activeTags.length === 0 || tags.some((tag) => selectedTags.has(tag));
+				projectItem.hidden = !matches;
+
+				if (matches) {
+					visibleCount += 1;
+				}
+			});
+
+			filterButtons.forEach((button) => {
+				const tag = button.getAttribute('data-tag');
+				const isActive = tag ? selectedTags.has(tag) : false;
+				const baseColor = button.getAttribute('data-base-color') ?? '#808080';
+				const activeBackground = `${baseColor}26`;
+				const activeBorder = `${baseColor}70`;
+				button.setAttribute('data-active', String(isActive));
+				button.setAttribute('aria-pressed', String(isActive));
+				button.style.backgroundColor = isActive ? activeBackground : 'rgba(120, 120, 120, 0.12)';
+				button.style.color = isActive ? baseColor : 'var(--alt-heading-color)';
+				button.style.borderColor = isActive ? activeBorder : 'rgba(120, 120, 120, 0.22)';
+			});
+
+			if (filterSummary) {
+				if (activeTags.length === 0) {
+					filterSummary.textContent = 'Showing all projects';
+				} else {
+					filterSummary.textContent = `${visibleCount} project${visibleCount === 1 ? '' : 's'} match ${activeTags.length} selected tag${activeTags.length === 1 ? '' : 's'}`;
+				}
+			}
+		}
+
+		filterButtons.forEach((button) => {
+			button.addEventListener('click', () => {
+				const tag = button.getAttribute('data-tag');
+
+				if (!tag) {
+					return;
+				}
+
+				if (selectedTags.has(tag)) {
+					selectedTags.delete(tag);
+				} else {
+					selectedTags.add(tag);
+				}
+
+				updateProjectFilters();
+			});
+		});
+
+		if (filterResetButton) {
+			filterResetButton.addEventListener('click', () => {
+				selectedTags.clear();
+				updateProjectFilters();
+			});
+		}
+
+		updateProjectFilters();
 
 		function typeRole(roleID: number, direction: number, letterID: number = 0) {
 			const text = myRoles[roleID];

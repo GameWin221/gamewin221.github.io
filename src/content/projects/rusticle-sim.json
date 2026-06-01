@@ -5,6 +5,6 @@
   "finishDate": "July 2023",
   "shortDescription": "Particle Life simulation made in Rust. Inspired by Tom Mohr's video on particle systems and emergent behavior.",
   "longDescription": "Particle Life simulation made in Rust. Inspired by Tom Mohr's video on particle systems and emergent behavior.",
-  "tags": ["Rust", "Simulation", "Optimization"],
+  "tags": ["Rust", "Simulation"],
   "socialMediaLink": "https://github.com/ghemyn/rusticle_sim"
 }

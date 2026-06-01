@@ -5,7 +5,7 @@
   "finishDate": "September 13 2025",
   "shortDescription": "Analog audio to digital USB audio converter.",
   "longDescription": "Device that converts analog Jack audio signal to digital USB audio. Powered by a Raspberry Pi Pico and an OPA2134PA operational amplifier.\nIt was a personal project I started in order to eventually be able to play my digital piano (that only has an analog Jack output) in silence.\nSoon turned out to be a cool project I can learn new things from and one which I can work on improving the sample audio quality on and on.",
-  "tags": ["Embedded", "Electronics", "C++", "Audio"],
+  "tags": ["Embedded", "C++", "Audio"],
   "socialMediaLink": "https://github.com/ghemyn/Jack2Digital",
   "aspectRatio": "5 / 4"
 }

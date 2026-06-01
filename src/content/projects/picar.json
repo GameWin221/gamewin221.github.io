@@ -5,7 +5,7 @@
   "finishDate": "9999",
   "shortDescription": "Autonomous and remote-controlled DIY car with Raspberry Pi 5 onboard.",
   "longDescription": "Features a CH32V003 chip on a custom PCB for PWM control. RPi 5 communicates with the chip over I2C using a simple register->value protocol. \nThe frame, the steering system and wheel mounts are all 3D printed parts assembled together either with LEGO-inspired pins or M3 screws.\nIt's my first project related to computer vision which I used to implement the aforementioned autonomous capabilities. The source video feed comes straight from the RPi Camera Module 2 that is mounted on the car and is being analyzed in real time.\nThere also is the fun manual mode in which the user can steer the car from their PC with a gamepad while viewing the live video feed from the car's camera.",
-  "tags": ["Robotics", "Embedded", "CV", "C", "PCB", "Python", "3D Printing"],
+  "tags": ["Robotics", "Embedded", "CV", "C", "Python", "3D Printing"],
   "socialMediaLink": "https://github.com/ghemyn/picar",
   "aspectRatio": "16 / 10"
 }

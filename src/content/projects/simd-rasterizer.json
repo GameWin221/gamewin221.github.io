@@ -5,6 +5,6 @@
   "finishDate": "August 25 2024",
   "shortDescription": "C++ SIMD-intense software rasterizer with unique visual style.",
   "longDescription": "A week-long project to learn a bit about SIMD and software rasterization. Instead of triangles it uses \"Patches\" which makes the rasterization much faster and also produces cool-looking geometry.\nAlso, it proved that MSVC is not that good at auto-vectorisation... Take a look at the Benchmarks section on the github page.",
-  "tags": ["SIMD", "Graphics", "Optimization", "C++"],
+  "tags": ["SIMD", "Graphics", "Assembly", "C++"],
   "socialMediaLink": "https://github.com/ghemyn/SIMDRasterizer"
 }

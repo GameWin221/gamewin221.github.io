@@ -5,6 +5,6 @@
   "finishDate": "July 14 2021",
   "shortDescription": "My mobile game released on Google Play store.",
   "longDescription": "Simple platformer where you control a ball and try to get it to the end of the level. \nMade in Unity.",
-  "tags": ["Game", "Unity", "Mobile"],
+  "tags": ["Game", "Unity"],
   "socialMediaLink": "/blog/the_retirement_of_my_game"
 }
