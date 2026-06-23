@@ -260,7 +260,7 @@ const blogposts = (await getCollection('blog')).sort(
 				.project-filters {
 					display: flex;
 					flex-direction: column;
-					gap: 0.85rem;
+
 					margin: 1rem 0 1.4rem;
 					padding: 1rem;
 					border-radius: 14px;
@@ -278,6 +278,16 @@ const blogposts = (await getCollection('blog')).sort(
 					display: none;
 				}
 
+				.project-filters summary .project-filter-by-tag::after {
+					content: '▾';
+					display: inline-block;
+					margin-left: 0.2rem;
+					transition: transform 0.2s ease;
+					font-size: 1.8rem;
+					margin-top: -0.5rem;
+					position: absolute;
+				}
+
 				.project-filters-header {
 					display: flex;
 					align-items: center;
@@ -286,14 +296,7 @@ const blogposts = (await getCollection('blog')).sort(
 					flex-wrap: wrap;
 				}
 
-				.project-filters summary .project-filter-state::after {
-					content: '▾';
-					display: inline-block;
-					margin-left: 0.5rem;
-					transition: transform 0.2s ease;
-				}
-
-				.project-filters[open] summary .project-filter-state::after {
+				.project-filters[open] summary .project-filter-by-tag::after {
 					transform: rotate(180deg);
 				}
 
@@ -303,7 +306,7 @@ const blogposts = (await getCollection('blog')).sort(
 				}
 
 				.project-filter-state {
-					font-size: 0.95rem;
+					font-size: 0.9rem;
 					color: var(--alt-heading-color);
 				}
 
@@ -312,6 +315,7 @@ const blogposts = (await getCollection('blog')).sort(
 					flex-wrap: wrap;
 					gap: 0.65rem;
 					margin-bottom: 0.5rem;
+					margin-top: 0.8rem;
 				}
 
 				.project-filter-chip {
@@ -587,7 +591,7 @@ const blogposts = (await getCollection('blog')).sort(
 				</header>
 				<details class="project-filters">
 					<summary class="project-filters-header" aria-label="Project tag filters">
-						<p>Filter by tag</p>
+						<p class="project-filter-by-tag">Filter by tag</p>
 						<p class="project-filter-state" data-filter-summary>Showing all projects</p>
 					</summary>
 					<div class="project-filter-chips">
@@ -701,7 +705,7 @@ const blogposts = (await getCollection('blog')).sort(
 				if (activeTags.length === 0) {
 					filterSummary.textContent = 'Showing all projects';
 				} else {
-					filterSummary.textContent = `${visibleCount} project${visibleCount === 1 ? '' : 's'} match ${activeTags.length} selected tag${activeTags.length === 1 ? '' : 's'}`;
+					filterSummary.textContent = `${visibleCount} project${visibleCount === 1 ? '' : 's'} match selected tag${activeTags.length === 1 ? '' : 's'}`;
 				}
 			}
 		}
